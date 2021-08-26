@@ -1,0 +1,1 @@
+#### Here is the place for the manifest.json
