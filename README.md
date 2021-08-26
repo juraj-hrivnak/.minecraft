@@ -1,3 +1,5 @@
+Minecraft modpack template, that uses [Pax] and [ModPackDownloader] in order to function.
+
 
 # Syncing mods
 To sync the mods with the ones that are writen in the manifest.json, run `sync_mods.bat`.
@@ -27,3 +29,4 @@ $ cd ./minecraft/pax
 
 <!-- Links: -->
 [Pax]: https://github.com/froehlichA/pax
+[ModPackDownloader]: https://github.com/Nincraft/ModPackDownloader
