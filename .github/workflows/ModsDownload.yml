@@ -16,6 +16,6 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Underdog-Mods
+          name: Mods
           path: mods
           retention-days: 5
