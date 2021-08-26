@@ -1,0 +1,35 @@
+
+# Mod Configs
+
+# Folders in .minecraft
+/mods/
+/saves/
+/screenshots/
+/server-resource-packs/
+/texturepacks/
+/pack/
+/nuclearcraft/
+/logs/
+/journeymap/
+/crash-reports/
+/dumps/
+/coremods/
+/.mixin.out/
+/downloads/
+/craftpresence/
+
+
+# Logs
+**/*.log
+
+# Client data
+.ReAuth.cfg
+usernamecache.json
+usercache.json
+servers.dat
+patchouli_data.json
+optionsof.txt
+options.txt
+
+# Pax
+/pax/logs/
