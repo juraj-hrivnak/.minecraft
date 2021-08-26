@@ -2,36 +2,29 @@ echo Started to syncing files!
 
 # config
 cd modpack/overrides
-if [ ! -d "/config" ]
-then
-    mkdir config
+if [ -d "config" ]; then
+    rm -rf config
 fi
-cd config
-if [ -d "../config" ]
-then
-    rm -r *
-fi
-echo removing files
-cd ../../../..
-cp -r config pax/modpack/overrides/
+cd ../../..
+cp -r config pax/modpack/overrides
 cd pax
 
-# # resources
-# cd modpack/overrides
-# if not exist "resources" mkdir "resources"
-# cd resources
-# rm -r /*
-# cd ../../../..
-# xcopy -r resources pax/modpack/overrides/resources/
-# cd pax
+# resources
+cd modpack/overrides
+if [ -d "resources" ]; then
+    rm -rf resources
+fi
+cd ../../..
+cp -r resources pax/modpack/overrides
+cd pax
 
-# # scripts
-# cd modpack/overrides
-# if not exist "scripts" mkdir "scripts"
-# cd scripts
-# rm -r /*
-# cd ../../../..
-# xcopy -r scripts pax/modpack/overrides-rcripts/
-# cd pax
+# scripts
+cd modpack/overrides
+if [ -d "scripts" ]; then
+    rm -rf scripts
+fi
+cd ../../..
+cp -r scripts pax/modpack/overrides
+cd pax
 
 read -p "Done!"

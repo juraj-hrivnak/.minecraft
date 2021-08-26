@@ -1,14 +1,13 @@
+echo Started to syncing mods! Be patient!
 
 cd ..
-if not exist "mods" mkdir "mods"
-cd mods
-for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
-cd ..\pax\modpack\overrides
-xcopy /s mods ..\..\..\mods\
-cd ..\..\.out
-xcopy /s missing_mods ..\..\mods\
-cd ..
+if [ -d "mods" ]; then
+    rm -rf mods
+fi
+cd pax/modpack/overrides
+cp -r mods ../../..
+cd ../..
 
-cmd /c java -jar ModpackDownloader-cli-0.6.1.jar -manifest modpack/manifest.json -folder ../mods
+java -jar ModpackDownloader-cli-0.6.1.jar -manifest modpack/manifest.json -folder ../mods
 
-echo Done!
+read -p "Done!"
