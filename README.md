@@ -11,8 +11,8 @@ To copy the overides you changed to the pax/modpack/overides folder, run `sync_o
 
 
 # Pax usage
-Use pax using command like or terminal.
-To see how [Pax] works it's recommended to go checkout its wiki: [here](https://github.com/froehlichA/pax/wiki)
+Use pax using command line or terminal.
+To see how [Pax] works it's recommended to checkout its wiki: [here](https://github.com/froehlichA/pax/wiki)
 
 ## Locating pax folder
 Locate the pax folder in your computer.
