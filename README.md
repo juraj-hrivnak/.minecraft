@@ -13,7 +13,7 @@ An easy-to-use template for an automated modpack development environment.
 
 ## How It Works
 
-![](https://i.imgur.com/ZfPR3Is.png)
+![](https://i.imgur.com/kCZhkXX.png)
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
