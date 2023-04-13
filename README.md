@@ -4,12 +4,14 @@ An easy-to-use template for an automated modpack development environment.
 
 ## Features
 
-- Manage mods without using the CurseForge launcher using [PAX].
-- Automatically
-  - export _modpack_ and _server pack_ and deploy to CurseForge and GitHub.
-  - handle _changelogs_ easily, based on [Keep a Changelog].
-  - handle development builds.
-  - close issues with the _fixed in dev_ label on release.
+- **⌨️ Manage mods in CLI interface** using **[PAX]** without the need to use CurseForge launcher. 
+- **📦 Export modpack and server pack** easily.
+- **🤝 Multiple people working together**.
+- **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
+- **🧬 CI/CD support**.
+  - **📤 Automatically deploy** to CurseForge and GitHub.
+  - **🗃️ Development builds**.
+  - **⚙️ Closes issues** with the _fixed in dev_ label on release.
 
 ## How It Works
 
