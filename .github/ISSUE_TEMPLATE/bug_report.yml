@@ -1,0 +1,55 @@
+name: "Bug/Crash Report"
+description: Create a new ticket for a bug/crash.
+body:
+  - type: textarea
+    attributes:
+      label: "Description"
+      description: |
+        Please enter an explicit __description__ of your issue.
+        You can also add __reproduction steps__ and __screenshots__ to the description.
+      placeholder: |
+        Short and explicit description of your incident... 
+        How do you trigger this bug? Please walk us through it step by step. 
+        If applicable, add screenshots to help explain your problem.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "The latest.log file"
+      description: |
+        Please provide a [mclo.gs](https://mclo.gs/) or [gist](https://gist.github.com/) link here. (Make sure that it isn't set to expire!)
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: "Modpack version"
+      description: |
+        What version of the modpack are you using? Do not just say "latest" please.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: "Launcher"
+      description: What launcher are you using?
+      multiple: true
+      options:
+        - CurseForge
+        - MultiMC
+        - Prism Launcher
+        - GDLauncher
+        - ATLauncher
+        - Vanilla
+        - Other (Write in the description)
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: "OS"
+      description: What is the impacted environment?
+      multiple: true
+      options:
+        - Windows
+        - Linux
+        - Mac
+    validations:
+      required: true
