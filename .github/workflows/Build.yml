@@ -1,0 +1,120 @@
+name: Build
+run-name: "Build #${{ github.run_number }}"
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  modpack-info:
+    name: Modpack Info
+    runs-on: ubuntu-latest
+    outputs:
+      projectname: ${{ steps.info.outputs.projectname }}
+      packversion: ${{ steps.info.outputs.packversion }}
+      mcversion: ${{ steps.info.outputs.mcversion }}
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - name: Get modpack info
+        id: info
+        run: |
+            manifestjson=`cat pax/modpack/manifest.json`
+            projectname=`echo $(jq -r '.name' <<< "$manifestjson")`
+            echo "projectname=$projectname" >> $GITHUB_OUTPUT
+            packversion=`echo $(jq -r '.version' <<< "$manifestjson")`
+            echo "packversion=$packversion" >> $GITHUB_OUTPUT
+            mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
+            echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
+      - name: Get tag
+        id: version
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: tag_not_found
+      - name: Rename changelog
+        run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}.md
+      - name: Upload changelog
+        uses: actions/upload-artifact@v3
+        with:
+          name: changelog
+          path: CHANGELOG-v${{ steps.info.outputs.packversion }}.md
+
+  build-modpack:
+    name: Build Modpack
+    runs-on: ubuntu-latest
+    needs: [modpack-info]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download changelog
+        uses: actions/download-artifact@v3
+        with:
+          name: changelog
+          path: pax/modpack
+      - name: Sync overrides
+        run: |
+          cd pax/
+          chmod +x ./sync_overrides.sh
+          ./sync_overrides.sh
+        shell: bash
+      - name: Export modpack
+        run: |
+          cd pax/
+          sudo chmod +x ./pax
+          ./pax export
+      - name: Rename zip
+        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}.zip
+      - name: Upload zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: modpack
+          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}.zip
+
+  build-serverpack:
+    name: Build Serverpack
+    runs-on: ubuntu-latest
+    needs: [modpack-info]
+    if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download Mods
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CF_API_KEY }}
+        run: |
+          mkdir ${GITHUB_WORKSPACE}/downloader
+          java -jar pax/ModpackDownloader-1.0-SNAPSHOT-jar-with-dependencies.jar pax/modpack downloader
+          cd downloader/mods
+          find . -type f -name '*.zip' -exec rm {} +
+          mv ../mods ../../mods
+      - name: Export serverpack
+        run: |
+          cd pax/serverpack/
+          java -jar ServerPackCreator-3.0.0-alpha.12.jar -cli
+      - name: Rename zip
+        run: |
+          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}-Server-Pack.zip
+      - name: Upload zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: serverpack
+          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}-Server-Pack.zip
+
+  release:
+    name: Release
+    needs: [modpack-info, build-modpack, build-serverpack]
+    if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
+    uses: ./.github/workflows/Release.yml
+    with:
+      projectname: ${{ needs.modpack-info.outputs.projectname }}
+      mcversion: ${{ needs.modpack-info.outputs.mcversion }}
+      tag: ${{ needs.modpack-info.outputs.tag }}
+      build: ${{ github.run_number }}
+    secrets: inherit
