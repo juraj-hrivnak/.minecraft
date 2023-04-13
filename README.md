@@ -11,6 +11,10 @@ An easy-to-use template for an automated modpack development environment.
   - handle development builds.
   - close issues with the _fixed in dev_ label on release.
 
+## How It Works
+
+![](https://i.imgur.com/ZfPR3Is.png)
+
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
