@@ -1,32 +1,16 @@
-Minecraft modpack template, that uses [Pax] and [ModPackDownloader] in order to function.
+# Modpack Template
 
+An easy-to-use template for an automated modpack development environment.
 
-# Syncing mods
-To sync the mods with the ones that are writen in the manifest.json, run `sync_mods.bat`.
+## Features
 
-# Syncing overides
-Everyting that is not writen in the manifest.json is an overide. (For example: configs, scrips, resources)
-To copy the overides you changed to the pax/modpack/overides folder, run `sync_overrides.bat`.
-
-
-
-# Pax usage
-Use pax using command line or terminal.
-To see how [Pax] works it's recommended to checkout its wiki: [here](https://github.com/froehlichA/pax/wiki)
-
-## Locating pax folder
-Locate the pax folder in your computer.
-On both Windows and Linux you can use `cd` to do that.
-
-### Examples:
-```cmd
-Windows:
-$ cd .\minecraft\pax
-
-Linux:
-$ cd ./minecraft/pax
-```
+- Manage mods without using the CurseForge launcher using [PAX].
+- Automatically
+  - export _modpack_ and _server pack_ and deploy to CurseForge and GitHub.
+  - handle _changelogs_ easily, based on [Keep a Changelog].
+  - handle development builds.
+  - close issues with the _fixed in dev_ label on release.
 
 <!-- Links: -->
-[Pax]: https://github.com/froehlichA/pax
-[ModPackDownloader]: https://github.com/Nincraft/ModPackDownloader
+[PAX]: https://github.com/froehlichA/pax
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
