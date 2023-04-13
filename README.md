@@ -4,11 +4,11 @@ An easy-to-use template for an automated modpack development environment.
 
 ## Features
 
-- **⌨️ Manage mods in CLI interface** using **[PAX]** without the need to use CurseForge launcher. 
+- **⌨️ Manage mods in CLI interface** using **[PAX]** without the need to use CurseForge launcher.
 - **📦 Export modpack and server pack** easily, using **[PAX]** and **[ServerPackCreator]**.
 - **🤝 Multiple people working together**.
   - **📥 Download mods and resource packs** using **[ModpackDownloader]**.
-  - **🧰 Easy integration with MultiMC file structure**.
+  - **🧰 Easy integration with [MultiMC] file structure**.
 - **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
 - **🧬 CI/CD** using GitHub Actions.
   - **📤 Automatically deploy** to CurseForge and GitHub in about 5 minutes.
@@ -25,10 +25,11 @@ This template uses various tools to help you with your modpack development and r
 
 - **Development** uses: **[PAX]** to manage mods, and **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json`, which requires the CurseForge API key.
 
-![](https://i.imgur.com/kCZhkXX.png)
+![Diagram](https://i.imgur.com/kCZhkXX.png)
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
 [ServerPackCreator]: https://github.com/Griefed/ServerPackCreator
 [ModpackDownloader]: https://github.com/Joshyx/ModpackDownloader
+[MultiMC]: https://multimc.org/
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
