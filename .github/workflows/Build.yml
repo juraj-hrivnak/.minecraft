@@ -26,6 +26,9 @@ jobs:
       - name: Get modpack info
         id: info
         run: |
+            if [ ! -f /pax/modpack/manifest.json ]; then
+                echo "::error::Could not find manifest.json!" && exit 1
+            fi
             manifestjson=`cat pax/modpack/manifest.json`
             projectname=`echo $(jq -r '.name' <<< "$manifestjson")`
             echo "projectname=$projectname" >> $GITHUB_OUTPUT
