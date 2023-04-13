@@ -11,7 +11,7 @@ An easy-to-use template for an automated modpack development environment.
 - **🧬 CI/CD support**.
   - **📤 Automatically deploy** to CurseForge and GitHub.
   - **🗃️ Development builds**.
-  - **⚙️ Closes issues** with the _fixed in dev_ label on release.
+  - **⚙️ Closes issues** with the 'fixed in dev' label on release.
 
 ## How It Works
 
