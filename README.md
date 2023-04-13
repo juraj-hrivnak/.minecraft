@@ -10,7 +10,7 @@ An easy-to-use template for an automated modpack development environment.
   - **📥 Download mods and resource packs** using **[ModpackDownloader]**.
   - **🧰 Easy integration with [MultiMC] file structure**.
 - **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
-- **🧬 CI/CD** using GitHub Actions.
+- **🧬 CI/CD** using **[GitHub Actions]**.
   - **📤 Automatically deploy** to CurseForge and GitHub in about 5 minutes.
   - **🗃️ Development builds**.
   - **⚙️ Close issues** with the 'fixed in dev' label on release.
@@ -20,8 +20,8 @@ An easy-to-use template for an automated modpack development environment.
 This template uses various tools to help you with your modpack development and release process.
 
 - **Release** uses: **[PAX]** to export the modpack as zip, **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json` required for server pack creation, which requires CurseForge API key, and **[ServerPackCreator]** to remove client-side mods and create the server pack.
-  - Modpack can be released using GitHub actions. (Recommended.) Which requires a CurseForge API token.
-  - Or it can be exported locally and then released on CurseForge manually. (Not recommended.)
+  - Modpack can be released using GitHub actions. (Recommended) Which requires a CurseForge API token.
+  - Or it can be exported locally and then released on CurseForge manually. (Not recommended)
 
 - **Development** uses: **[PAX]** to manage mods, and **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json`, which requires the CurseForge API key.
 
@@ -33,3 +33,4 @@ This template uses various tools to help you with your modpack development and r
 [ModpackDownloader]: https://github.com/Joshyx/ModpackDownloader
 [MultiMC]: https://multimc.org/
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
+[GitHub Actions]: .github/workflows
