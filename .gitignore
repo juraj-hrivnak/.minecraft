@@ -1,35 +1,88 @@
 
-# Mod Configs
+# Configs
+/config/BiomeTweaker/output/*
+/config/fantasticlib/*
+/config/cavegenerator/generated/*
+/config/codechicken/supporters.json
+/config/splash.properties
+/config/waila/waila.cfg
+/config/fantasticlib.cfg
+/config/InvTweaks.cfg
+/config/Weather2/EZGUIConfigClientData.dat
+/config/cherishedworlds/favorites.dat
+/config/activity.json
+/config/AppliedEnergistics2/items.csv
+/config/customloadingscreen_timings.nbt
+/config/cherishedworlds/favorites.dat
+/config/jei/bookmarks.ini
+/config/jei/worldSettings.cfg
+/config/moresoundconfig.cfg
 
 # Folders in .minecraft
-/mods/
-/saves/
-/screenshots/
-/server-resource-packs/
-/texturepacks/
-/pack/
-/nuclearcraft/
-/logs/
-/journeymap/
-/crash-reports/
-/dumps/
-/coremods/
-/.mixin.out/
-/downloads/
-/craftpresence/
-
+/assetmover/assets/*
+/mods/*
+/resourcepacks/*
+/saves/*
+/screenshots/*
+/server-resource-packs/*
+/texturepacks/*
+/pack/*
+/nuclearcraft/*
+/mineraltracker/*
+/logs/*
+/journeymap/*
+/encyclopedia-servers/*
+/fancymenu_data/*
+/crash-reports/*
+/dumps/*
+/coremods/*
+/.mixin.out/*
+/downloads/*
+/craftpresence/*
+/TombManyGraves/*
+/icon.png
 
 # Logs
 **/*.log
+**/*.gz
 
 # Client data
-.ReAuth.cfg
-usernamecache.json
-usercache.json
-servers.dat
-patchouli_data.json
-optionsof.txt
-options.txt
+/.ReAuth.cfg
+/local/client/rtdata.json
+/hei_bookmarks.ini
+/usernamecache.json
+/usercache.json
+/servers.dat
+/patchouli_data.json
+/seen_buildersbag_addons.txt
+/pack.zip
+/knownkeys.txt
+/optionsof.txt
+/options.txt
+/optionsshaders.txt
+/mountains.txt
 
 # Pax
-/pax/logs/
+/pax/.out/*
+/pax/logs/*
+/pax/cacert.pem
+/pax/libcrypto-1_1-x64.dll
+/pax/libcrypto-1_1.dll
+/pax/libssl-1_1-x64.dll
+/pax/libssl-1_1.dll
+/pax/pax.exe
+/pax/pax
+/pax/downloader/*
+/pax/modpack/overrides/config/*
+/pax/modpack/overrides/local/*
+/pax/modpack/overrides/oresources/*
+/pax/modpack/overrides/patchouli_books/*
+/pax/modpack/overrides/resources/*
+/pax/modpack/overrides/scripts/*
+/pax/modpack/overrides/structures/*
+
+# Server Pack
+/pax/serverpack/work/*
+/pax/serverpack/server-packs/*
+/pax/serverpack/logs/*
+/pax/serverpack/ServerPackCreator-*.jar
