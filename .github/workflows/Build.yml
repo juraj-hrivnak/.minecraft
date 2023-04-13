@@ -67,6 +67,8 @@ jobs:
       - name: Export modpack
         run: |
           cd pax/
+          pax_version=$(grep -Po '(?<="PAX": ")[^"]*' setup.json)
+          curl https://github.com/froehlichA/pax/releases/download/v$pax_version/pax -o pax -L -J
           sudo chmod +x ./pax
           ./pax export
       - name: Rename zip
