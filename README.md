@@ -10,10 +10,10 @@ An easy-to-use template for an automated modpack development environment.
   - **📥 Download mods and resource packs** using **[ModpackDownloader]**.
   - **🧰 Easy integration with MultiMC file structure**.
 - **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
-- **🧬 CI/CD support**.
+- **🧬 CI/CD** using GitHub Actions.
   - **📤 Automatically deploy** to CurseForge and GitHub in about 5 minutes.
   - **🗃️ Development builds**.
-  - **⚙️ Closes issues** with the 'fixed in dev' label on release.
+  - **⚙️ Close issues** with the 'fixed in dev' label on release.
 
 ## How It Works
 
@@ -29,6 +29,6 @@ This template uses various tools to help you with your modpack development and r
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
-[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 [ServerPackCreator]: https://github.com/Griefed/ServerPackCreator
 [ModpackDownloader]: https://github.com/Joshyx/ModpackDownloader
+[Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
