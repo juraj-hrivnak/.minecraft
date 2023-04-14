@@ -1,14 +1,10 @@
 #!/bin/bash
 
-depth=5
+depth=1
 
 git checkout main
-mods_removed=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^-' | grep -P -o '(?<="files":([^\s]*|[^]*))(?<="name":[\s]*")[^"]*' | sed -e 's/^/- /')
-mods_added=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^+' | grep -P -o '(?<="files":([^\s]*|[^]*))(?<="name":[\s]*")[^"]*' | sed -e 's/^/- /')
-
-# (?:(?<="files":[^\s]*)|(?<="files":[^]*))(?<="name":[\s]*")[^"]*
-
-# (?:(?<="files":[^]*)(?<="name":[\s]*"))[^"]*
+mods_removed=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^-' | grep -P -o '"files":.*\[\K[^\]]*' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+mods_added=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^+' | grep -P -o '"files":.*\[\K[^\]]*' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
