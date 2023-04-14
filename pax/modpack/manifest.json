@@ -16,6 +16,31 @@
     "name": "TemplateModpack",
     "files": [
         {
+            "projectID": 32274,
+            "fileID": 2682920,
+            "required": true,
+            "__meta": {
+                "name": "JourneyMap",
+                "pinned": true
+            }
+        },
+        {
+            "projectID": 59751,
+            "fileID": 2918418,
+            "required": true,
+            "__meta": {
+                "name": "Forestry"
+            }
+        },
+        {
+            "projectID": 71738,
+            "fileID": 2661618,
+            "required": true,
+            "__meta": {
+                "name": "ShetiPhianCore"
+            }
+        },
+        {
             "projectID": 557549,
             "fileID": 4451828,
             "required": true,
