@@ -14,34 +14,5 @@
     "version": "1.0.0",
     "author": "TemplateModpackAuthor",
     "name": "TemplateModpack",
-    "files": [
-        {
-            "projectID": 32274,
-            "fileID": 2682920,
-            "required": true,
-            "__meta": {
-                "name": "JourneyMap",
-                "pinned": true
-            }
-        },
-        {
-            "projectID": 557549,
-            "fileID": 4451828,
-            "required": true,
-            "__meta": {
-                "name": "Had Enough Items"
-            }
-        },
-        {
-            "projectID": 74072,
-            "fileID": 2902483,
-            "required": true,
-            "__meta": {
-                "name": "Tinkers Construct",
-                "dependencies": [
-                    74924
-                ]
-            }
-        }
-    ]
+    "files": []
 }
