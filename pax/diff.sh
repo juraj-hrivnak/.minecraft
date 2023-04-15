@@ -1,7 +1,5 @@
 #!/bin/bash
 
-git checkout main
-cd ../
 commit=$(git log -n 1 --skip 2 --pretty=format:"%h" -- pax/modpack/manifest.json)
 latest_commit=$(git log -n 1 --skip 2 --pretty=format:"%h" origin/main)
 
