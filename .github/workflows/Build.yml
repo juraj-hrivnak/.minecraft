@@ -24,6 +24,7 @@ jobs:
         with:
           fetch-depth: 2
       - name: Get modpack info
+        shell: bash
         id: info
         run: |
           if [ ! -f pax/modpack/manifest.json ]; then
