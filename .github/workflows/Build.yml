@@ -37,10 +37,9 @@ jobs:
           mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
       - name: Diff
-        shell: bash
         run: |
           chmod +x ./pax/diff.sh
-          bash ./pax/diff.sh -x
+          ./pax/diff.sh
       - name: Get tag
         id: version
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
