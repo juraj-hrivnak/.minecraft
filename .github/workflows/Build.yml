@@ -41,6 +41,13 @@ jobs:
         run: |
           set +e
 
+          git --version
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git status
+          git tag
+          git describe
+
           commit=$(git log -n 1 --skip 2 --pretty=format:"%h" -- pax/modpack/manifest.json)
           latest_commit=$(git log -n 1 --skip 2 --pretty=format:"%h" origin/main)
 
