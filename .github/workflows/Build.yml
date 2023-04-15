@@ -41,15 +41,11 @@ jobs:
         run: |
           set +e
 
-          git --version
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-
           commit=$(git log -n 1 --skip 2 --pretty=format:"%h" -- pax/modpack/manifest.json)
           latest_commit=$(git log -n 1 --skip 2 --pretty=format:"%h" origin/main)
 
-          echo $commit >> $GITHUB_OUTPUT
-          echo $latest_commit >> $GITHUB_OUTPUT
+          echo $commit
+          echo $latest_commit
 
           mods_added=$(git diff -U0 $commit $latest_commit -- pax/modpack/manifest.json | grep '^+')
           mods_removed=$(git diff -U0 $commit $latest_commit -- pax/modpack/manifest.json | grep '^-')
