@@ -37,7 +37,7 @@ jobs:
           mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
       - name: Diff
-        shell: bash {0}
+        shell: bash
         run: |
           chmod +x ./pax/diff.sh
           ./pax/diff.sh
