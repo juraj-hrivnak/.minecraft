@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd ../
-commit=$(git log -n 1 --skip 2 --pretty=format:"%h" -- pax/modpack/manifest.json)
-latest_commit=$(git log -n 1 --skip 2 --pretty=format:"%h" origin/main)
+commit=$(git log -n 1 --pretty=format:"%h" -- pax/modpack/manifest.json)
+latest_commit=$(git log -n 1 --pretty=format:"%h" origin/main)
 
 echo $commit
 echo $latest_commit
