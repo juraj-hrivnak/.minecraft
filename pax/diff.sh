@@ -1,10 +1,11 @@
 #!/bin/bash
 
-depth=1
-
 git checkout main
-mods_removed=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^-')
-mods_added=$(git diff -U0 {main~${depth},main}:pax/modpack/manifest.json | grep '^+')
+commit=$(git log --skip 2 --pretty=format:"%h" -n 1 --follow modpack/manifest.json)
+
+mods_removed=$(git diff -U0 {${commit},main}:pax/modpack/manifest.json | grep '^-')
+mods_added=$(git diff -U0 {${commit},main}:pax/modpack/manifest.json | grep '^+')
+
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

@@ -16,14 +16,6 @@
     "name": "TemplateModpack",
     "files": [
         {
-            "projectID": 557549,
-            "fileID": 4451828,
-            "required": true,
-            "__meta": {
-                "name": "Had Enough Items"
-            }
-        },
-        {
             "projectID": 74072,
             "fileID": 2902483,
             "required": true,
