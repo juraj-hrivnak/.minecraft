@@ -54,13 +54,13 @@ jobs:
           GREEN='\033[0;32m'
           NC='\033[0m'
 
-          echo -e "x---------------x" >> $GITHUB_STEP_SUMMARY
-          echo -e "|  Mod Changes  |" >> $GITHUB_STEP_SUMMARY
-          echo -e "${GREEN}Added:" >> $GITHUB_STEP_SUMMARY
-          echo -e $mods_added | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
-          echo -e "${RED}Removed:" >> $GITHUB_STEP_SUMMARY
-          echo -e $mods_removed | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
-          echo -e "${NC}x---------------x" >> $GITHUB_STEP_SUMMARY
+          echo "## Mod Changes" >> $GITHUB_STEP_SUMMARY
+          echo "```markdown" >> $GITHUB_STEP_SUMMARY
+          echo "Added:" >> $GITHUB_STEP_SUMMARY
+          echo $mods_added | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo "Removed:" >> $GITHUB_STEP_SUMMARY
+          echo $mods_removed | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
       - name: Get tag
         id: version
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
