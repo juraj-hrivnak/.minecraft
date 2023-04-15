@@ -22,34 +22,6 @@
             "__meta": {
                 "name": "Kiwi 🥝 (Forge)"
             }
-        },
-        {
-            "projectID": 303694,
-            "fileID": 2932722,
-            "required": true,
-            "__meta": {
-                "name": "Cuisine 🍳",
-                "dependencies": [
-                    306770,
-                    303657
-                ]
-            }
-        },
-        {
-          "projectID": 363102,
-          "fileID": 4118829,
-          "required": true,
-          "__meta": {
-            "name": "Dynamic Darkness"
-          }
-        },
-        {
-          "projectID": 363860,
-          "fileID": 3048407,
-          "required": true,
-          "__meta": {
-            "name": "Better Chat"
-          }
         }
     ]
 }
