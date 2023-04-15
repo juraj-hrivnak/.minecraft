@@ -16,15 +16,6 @@
     "name": "TemplateModpack",
     "files": [
         {
-            "projectID": 32274,
-            "fileID": 2682920,
-            "required": true,
-            "__meta": {
-                "name": "JourneyMap",
-                "pinned": true
-            }
-        },
-        {
             "projectID": 557549,
             "fileID": 4451828,
             "required": true,
