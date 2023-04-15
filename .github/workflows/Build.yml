@@ -40,7 +40,7 @@ jobs:
         shell: bash
         run: |
           chmod +x ./pax/diff.sh
-          ./pax/diff.sh
+          bash ./pax/diff.sh -x
       - name: Get tag
         id: version
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
