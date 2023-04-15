@@ -41,14 +41,14 @@ jobs:
         run: |
           set +e
 
-          commit=$(git log -n 1 --pretty=format:"%h" -- pax/modpack/manifest.json)
-          latest_commit=$(git log -n 1 --pretty=format:"%h" origin/main)
+          previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- pax/modpack/manifest.json)
+          latest_commit=$(git log -n 1 --pretty=format:"%h" origin/main -- pax/modpack/manifest.json)
 
-          echo $commit
-          echo $latest_commit
+          echo "previous commit: $previous_commit"
+          echo "latest commit: $latest_commit"
 
-          mods_added=$(git diff -U0 $commit $latest_commit -- pax/modpack/manifest.json | grep '^+')
-          mods_removed=$(git diff -U0 $commit $latest_commit -- pax/modpack/manifest.json | grep '^-')
+          mods_added=$(git diff -U0 $previous_commit $latest_commit -- pax/modpack/manifest.json | grep '^+')
+          mods_removed=$(git diff -U0 $previous_commit $latest_commit -- pax/modpack/manifest.json | grep '^-')
 
           RED='\033[0;31m'
           GREEN='\033[0;32m'
