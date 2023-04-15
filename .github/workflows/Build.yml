@@ -37,7 +37,7 @@ jobs:
           mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
 
-          commit=$(git log --skip 2 --pretty=format:"%h" -n 1 --follow modpack/manifest.json)
+          commit=$(git log --skip 2 --pretty=format:"%h" -n 1 --follow pax/modpack/manifest.json)
 
           mods_removed=$(git diff -U0 {${commit},main}:pax/modpack/manifest.json | grep '^-')
           mods_added=$(git diff -U0 {${commit},main}:pax/modpack/manifest.json | grep '^+')
