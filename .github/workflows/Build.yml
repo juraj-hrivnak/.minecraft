@@ -38,6 +38,7 @@ jobs:
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
       - name: Diff
         run: |
+          set +x
           chmod +x ./pax/diff.sh
           ./pax/diff.sh
       - name: Get tag
