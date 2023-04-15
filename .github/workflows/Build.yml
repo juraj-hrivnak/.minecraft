@@ -61,9 +61,9 @@ jobs:
           echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
           echo '```markdown' >> $GITHUB_STEP_SUMMARY
           echo 'Added:' >> $GITHUB_STEP_SUMMARY
-          echo $mods_added | grep -P -o '((?<!"files".)[\s\S])*$' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo $mods_added | grep -P -o '(?<="files"(.|\s)(.|\s).)[\s\S]*\]' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
           echo 'Removed:' >> $GITHUB_STEP_SUMMARY
-          echo $mods_removed | grep -P -o '((?<!"files".)[\s\S])*$' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
+          echo $mods_removed | grep -P -o '(?<="files"(.|\s)(.|\s).)[\s\S]*\]' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
       - name: Get tag
         id: version
