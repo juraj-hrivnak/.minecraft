@@ -36,12 +36,20 @@
             }
         },
         {
-            "projectID": 306549,
-            "fileID": 2906537,
-            "required": true,
-            "__meta": {
-                "name": "Tips"
-            }
+          "projectID": 363102,
+          "fileID": 4118829,
+          "required": true,
+          "__meta": {
+            "name": "Dynamic Darkness"
+          }
+        },
+        {
+          "projectID": 363860,
+          "fileID": 3048407,
+          "required": true,
+          "__meta": {
+            "name": "Better Chat"
+          }
         }
     ]
 }
