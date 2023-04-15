@@ -24,7 +24,6 @@ jobs:
         with:
           fetch-depth: 2
       - name: Get modpack info
-        shell: bash
         id: info
         run: |
           if [ ! -f pax/modpack/manifest.json ]; then
@@ -37,6 +36,9 @@ jobs:
           echo "packversion=$packversion" >> $GITHUB_OUTPUT
           mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
+      - name: Diff
+        shell: bash
+        run: |
           chmod +x ./pax/diff.sh
           ./pax/diff.sh
       - name: Get tag
