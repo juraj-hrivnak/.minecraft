@@ -11,12 +11,29 @@ echo "branch: $branch"
 echo "previous commit: $previous_commit"
 echo "latest commit: $latest_commit"
 
-mods_added=$(git diff -U0 $previous_commit $latest_commit -- $manifest | grep '^+')
-mods_removed=$(git diff -U0 $previous_commit $latest_commit -- $manifest | grep '^-')
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
+
+function mods_added {
+    local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local var2=""$var1" | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]'"
+    local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+    if [[ ! -z ""$var3"" ]]; then
+        echo -e "${GREEN}Added:"
+        echo "$var3"
+    fi
+}
+
+function mods_removed {
+    local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local var2=""$var1" | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]'"
+    local var3=$(echo "$var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+    if [[ ! -z ""$var3"" ]]; then
+        echo -e "${RED}Removed:"
+        echo "$var3"
+    fi
+}
 
 # | grep -P -o '"files":[\s]*\[\K[^\]]*'
 # | grep -P -o '((?<!"files".)[\s\S])*$'
@@ -27,10 +44,8 @@ NC='\033[0m'
 
 echo -e "x---------------x"
 echo -e "|  Mod Changes  |"
-echo -e "${GREEN}Added:"
-echo -e $mods_added | grep -P -o '((?<!"files".)[\s\S])*$' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /'
-echo -e "${RED}Removed:"
-echo -e $mods_removed | grep -P -o '((?<!"files".)[\s\S])*$' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /'
+mods_added
+mods_removed
 echo -e "${NC}x---------------x"
 
 # Wait for user response
