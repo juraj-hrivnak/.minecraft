@@ -44,7 +44,7 @@ jobs:
           manifest="pax/modpack/manifest.json"
 
           branch=$(git rev-parse --abbrev-ref HEAD)
-          previous_commit=$(git log -n 1 --skip 14 --pretty=format:"%h" -- $manifest)
+          previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
           latest_commit=$(git log -n 1 --pretty=format:"%h" $branch -- $manifest)
 
           echo "branch: $branch"
