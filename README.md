@@ -1,4 +1,4 @@
-# Modpack Development Environment
+# .minecraft
 
 An easy-to-use template for an automated modpack development environment.
 
