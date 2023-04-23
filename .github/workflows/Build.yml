@@ -139,6 +139,14 @@ jobs:
     needs: [modpack-info]
     if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
     steps:
+      - name: Check if CF_API_KEY exist
+        shell: bash
+        run: |
+          if [ "${{ secrets.CF_API_KEY }}" == '' ]; then
+            echo '> **Warning**' >> $GITHUB_STEP_SUMMARY
+            echo '> No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download Mods
