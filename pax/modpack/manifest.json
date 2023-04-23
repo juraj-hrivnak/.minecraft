@@ -42,6 +42,39 @@
           303657
         ]
       }
+    },
+    {
+      "projectID": 419286,
+      "fileID": 4459218,
+      "required": true,
+      "__meta": {
+        "name": "MixinBooter",
+        "explicit": false
+      }
+    },
+    {
+      "projectID": 624243,
+      "fileID": 4475780,
+      "required": true,
+      "__meta": {
+        "name": "ModularUI",
+        "explicit": false,
+        "dependencies": [
+          419286
+        ]
+      }
+    },
+    {
+      "projectID": 632327,
+      "fileID": 4502668,
+      "required": true,
+      "__meta": {
+        "name": "Inventory Bogo Sorter",
+        "dependencies": [
+          419286,
+          624243
+        ]
+      }
     }
   ]
 }
