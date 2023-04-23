@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
       - name: Get modpack info
         id: info
         run: |
@@ -143,10 +143,14 @@ jobs:
         shell: bash
         run: |
           if [ "${{ secrets.CF_API_KEY }}" == '' ]; then
-            echo '> **Warning**' >> $GITHUB_STEP_SUMMARY
-            echo '> No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
+            echo '## Warning' >> $GITHUB_STEP_SUMMARY
+            echo 'No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
+      - uses: styfle/cancel-workflow-action
+        if: failure()
+        with:
+          workflow_id: ${{ github.run_id }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download Mods
