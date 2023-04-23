@@ -32,7 +32,7 @@ This template uses various tools to help you with your modpack development and r
 ## Setup
 
 1. Click on the "Use this template" button.
-2. Clone the repository to the your modpack folder.
+2. Clone the repository to your modpack folder.
 3. Run the `setup-windows.ps1` (Windows) or `setup-unix.sh` (Linux/MacOS) script located in the `./pax` folder and wait until it's done.
 
 <!-- Links: -->
