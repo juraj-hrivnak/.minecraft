@@ -1,5 +1,7 @@
 # .minecraft
 
+[![Build](https://github.com/juraj-hrivnak/.minecraft/actions/workflows/Build.yml/badge.svg)](https://github.com/juraj-hrivnak/.minecraft/actions/workflows/Build.yml)
+
 An easy-to-use template for an automated modpack development environment.
 
 ## Features
