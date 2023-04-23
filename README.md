@@ -27,6 +27,12 @@ This template uses various tools to help you with your modpack development and r
 
 ![Diagram](https://i.imgur.com/kCZhkXX.png)
 
+## Setup
+
+1. Click on the "Use this template" button.
+2. Clone the repository to the your modpack folder.
+3. Run the `setup-windows.ps1` (Windows) or `setup-unix.sh` (Linux/MacOS) script located in the `./pax` folder and wait until it's done.
+
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
 [ServerPackCreator]: https://github.com/Griefed/ServerPackCreator
