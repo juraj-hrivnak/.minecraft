@@ -139,21 +139,12 @@ jobs:
     needs: [modpack-info]
     if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
     steps:
-      - name: CF_API_KEY
-        id: api_key
+      - name: Check if CF_API_KEY exist
         shell: bash
         run: |
           if [ "${{ secrets.CF_API_KEY }}" == '' ]; then
-            echo '## :x: Warning' >> $GITHUB_STEP_SUMMARY
-            echo '- No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
-            echo '- [tutorial](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)' >> $GITHUB_STEP_SUMMARY
-            echo '::error::No value found for secret key `CF_API_KEY`.' && exit 1
+            echo '::error::No value found for secret key `CF_API_KEY`. See [GitHub Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)' && exit 1
           fi
-      - name: Cancel
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Custom error message')
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download Mods
