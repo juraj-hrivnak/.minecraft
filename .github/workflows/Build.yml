@@ -140,14 +140,17 @@ jobs:
     if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
     steps:
       - name: Check if CF_API_KEY exist
+        id: api_key
         shell: bash
         run: |
           if [ "${{ secrets.CF_API_KEY }}" == '' ]; then
             echo '## Warning' >> $GITHUB_STEP_SUMMARY
             echo 'No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
-            exit 1
+            echo "exist=false" >> $GITHUB_OUTPUT
+          else
+            echo "exist=true" >> $GITHUB_OUTPUT
           fi
-      - if: failure()
+      - if: ${{ steps.api_key.outputs.exist != 'true' }}
         uses: andymckay/cancel-action@0.3
       - name: Checkout
         uses: actions/checkout@v3
