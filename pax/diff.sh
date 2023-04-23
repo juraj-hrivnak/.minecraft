@@ -48,12 +48,9 @@ function mods_removed {
 
 echo -e "x---------------x"
 echo -e "|  Mod Changes  |"
-echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
-echo '```markdown' >> $GITHUB_STEP_SUMMARY
 mods_added
 mods_removed
 echo -e "${NC}x---------------x"
-echo '```' >> $GITHUB_STEP_SUMMARY
 
 # Wait for user response
 read -p "Done! Press any key to continue" x
