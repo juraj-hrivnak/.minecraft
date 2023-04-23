@@ -16,31 +16,31 @@
   "name": "TestModpacke",
   "files": [
     {
+      "projectID": 74072,
+      "fileID": 2902483,
+      "required": true,
+      "__meta": {
+        "name": "Tinkers Construct",
+        "dependencies": [
+          74924
+        ]
+      }
+    },
+    {
+      "projectID": 74924,
+      "fileID": 2713386,
+      "required": true,
+      "__meta": {
+        "name": "Mantle",
+        "explicit": false
+      }
+    },
+    {
       "projectID": 238222,
       "fileID": 4393461,
       "required": true,
       "__meta": {
         "name": "Just Enough Items (JEI)"
-      }
-    },
-    {
-      "projectID": 303657,
-      "fileID": 2704824,
-      "required": true,
-      "__meta": {
-        "name": "Kiwi 🥝 (Forge)"
-      }
-    },
-    {
-      "projectID": 303694,
-      "fileID": 2932722,
-      "required": true,
-      "__meta": {
-        "name": "Cuisine 🍳",
-        "dependencies": [
-          306770,
-          303657
-        ]
       }
     },
     {
