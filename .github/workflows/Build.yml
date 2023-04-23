@@ -147,7 +147,7 @@ jobs:
             echo 'No value found for secret key `CF_API_KEY`.' >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
-      - uses: styfle/cancel-workflow-action
+      - uses: styfle/cancel-workflow-action@0.11.0
         if: failure()
         with:
           workflow_id: ${{ github.run_id }}
