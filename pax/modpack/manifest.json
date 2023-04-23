@@ -1,39 +1,47 @@
 {
-    "minecraft": {
-        "version": "1.12.2",
-        "modLoaders": [
-            {
-                "id": "forge-14.23.5.2860",
-                "primary": true
-            }
-        ]
-    },
-    "manifestType": "minecraftModpack",
-    "overrides": "overrides",
-    "manifestVersion": 1,
-    "version": "1.0.0",
-    "author": "TemplateModpackAuthor",
-    "name": "TestModpacke",
-    "files": [
-        {
-            "projectID": 303657,
-            "fileID": 2704824,
-            "required": true,
-            "__meta": {
-                "name": "Kiwi 🥝 (Forge)"
-            }
-        },
-        {
-            "projectID": 303694,
-            "fileID": 2932722,
-            "required": true,
-            "__meta": {
-                "name": "Cuisine 🍳",
-                "dependencies": [
-                    306770,
-                    303657
-                ]
-            }
-        }
+  "minecraft": {
+    "version": "1.12.2",
+    "modLoaders": [
+      {
+        "id": "forge-14.23.5.2860",
+        "primary": true
+      }
     ]
+  },
+  "manifestType": "minecraftModpack",
+  "overrides": "overrides",
+  "manifestVersion": 1,
+  "version": "1.0.0",
+  "author": "TemplateModpackAuthor",
+  "name": "TestModpacke",
+  "files": [
+    {
+      "projectID": 238222,
+      "fileID": 4393461,
+      "required": true,
+      "__meta": {
+        "name": "Just Enough Items (JEI)"
+      }
+    },
+    {
+      "projectID": 303657,
+      "fileID": 2704824,
+      "required": true,
+      "__meta": {
+        "name": "Kiwi 🥝 (Forge)"
+      }
+    },
+    {
+      "projectID": 303694,
+      "fileID": 2932722,
+      "required": true,
+      "__meta": {
+        "name": "Cuisine 🍳",
+        "dependencies": [
+          306770,
+          303657
+        ]
+      }
+    }
+  ]
 }
