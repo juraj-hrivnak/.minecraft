@@ -35,8 +35,6 @@ function mods_removed {
     fi
 }
 
-echo "$(git diff -W $previous_commit $latest_commit -- $manifest)"
-
 # | grep -P -o '"files":[\s]*\[\K[^\]]*'
 # | grep -P -o '((?<!"files".)[\s\S])*$'
 # | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]'
