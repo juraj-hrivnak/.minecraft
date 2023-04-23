@@ -19,10 +19,10 @@ jobs:
       mcversion: ${{ steps.info.outputs.mcversion }}
       tag: ${{ steps.version.outputs.tag }}
     steps:
-      - name: Checkout
+      - name: Checkout with fetch depth 2
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
       - name: Get modpack info
         id: info
         run: |
@@ -36,7 +36,16 @@ jobs:
           echo "packversion=$packversion" >> $GITHUB_OUTPUT
           mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
-      - name: Diff
+      - name: Get tag
+        id: version
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: tag_not_found
+      - name: Checkout with fetch depth 0
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Get mod changes
         shell: bash
         run: |
           set +e
@@ -87,11 +96,6 @@ jobs:
           mods_removed
           echo -e "${NC}x---------------x"
           echo '```' >> $GITHUB_STEP_SUMMARY
-      - name: Get tag
-        id: version
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-        with:
-          fallback: tag_not_found
       - name: Rename changelog
         run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}.md
       - name: Upload changelog
@@ -143,7 +147,7 @@ jobs:
         shell: bash
         run: |
           if [ "${{ secrets.CF_API_KEY }}" == '' ]; then
-            echo '::error::No value found for secret key `CF_API_KEY`. See [GitHub Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)' && exit 1
+            echo '::error::No value found for secret key `CF_API_KEY`. See https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository' && exit 1
           fi
       - name: Checkout
         uses: actions/checkout@v3

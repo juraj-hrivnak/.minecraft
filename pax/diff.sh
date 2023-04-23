@@ -22,8 +22,6 @@ function mods_added {
     if [[ ! -z ""$var3"" ]]; then
         echo -e "${GREEN}Added:"
         echo "$var3"
-        echo 'Added:' >> $GITHUB_STEP_SUMMARY
-        echo "$var3" >> $GITHUB_STEP_SUMMARY
     fi
 }
 
@@ -34,10 +32,10 @@ function mods_removed {
     if [[ ! -z ""$var3"" ]]; then
         echo -e "${RED}Removed:"
         echo "$var3"
-        echo 'Removed:' >> $GITHUB_STEP_SUMMARY
-        echo "$var3" >> $GITHUB_STEP_SUMMARY
     fi
 }
+
+echo "$(git diff -W $previous_commit $latest_commit -- $manifest)"
 
 # | grep -P -o '"files":[\s]*\[\K[^\]]*'
 # | grep -P -o '((?<!"files".)[\s\S])*$'

@@ -52,6 +52,12 @@ jobs:
     name: Deploy to CurseForge
     runs-on: ubuntu-latest
     steps:
+      - name: Check if CF_API_TOKEN exist
+        shell: bash
+        run: |
+          if [ "${{ secrets.CF_API_TOKEN }}" == '' ]; then
+            echo '::error::No value found for secret key `CF_API_TOKEN`. See https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository' && exit 1
+          fi
       - name: Download modpack
         uses: actions/download-artifact@v3
         with:
