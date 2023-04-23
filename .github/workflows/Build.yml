@@ -56,27 +56,27 @@ jobs:
           NC='\033[0m'
 
           function mods_added {
-              local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
-              local var2=$(echo "$var1" | tr -d '\n' | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]')
-              local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-              if [[ ! -z ""$var3"" ]]; then
-                  echo -e "${GREEN}Added:"
-                  echo "$var3"
-                  echo -e "${GREEN}Added:" >> $GITHUB_STEP_SUMMARY
-                  echo "$var3" >> $GITHUB_STEP_SUMMARY
-              fi
+            local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+            local var2=$(echo "$var1" | tr -d '\n' | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]')
+            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+            if [[ ! -z ""$var3"" ]]; then
+              echo -e "${GREEN}Added:"
+              echo "$var3"
+              echo 'Added:' >> $GITHUB_STEP_SUMMARY
+              echo "$var3" >> $GITHUB_STEP_SUMMARY
+            fi
           }
 
           function mods_removed {
-              local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
-              local var2=$(echo "$var1" | tr -d '\n' | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]')
-              local var3=$(echo "$var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-              if [[ ! -z ""$var3"" ]]; then
-                  echo -e "${RED}Removed:"
-                  echo "$var3"
-                  echo -e "${RED}Removed:" >> $GITHUB_STEP_SUMMARY
-                  echo "$var3" >> $GITHUB_STEP_SUMMARY
-              fi
+            local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+            local var2=$(echo "$var1" | tr -d '\n' | grep -P -o '((?<!"files"(.|\s)(.|\s))[\s\S])*\]')
+            local var3=$(echo "$var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+            if [[ ! -z ""$var3"" ]]; then
+              echo -e "${RED}Removed:"
+              echo "$var3"
+              echo 'Removed:' >> $GITHUB_STEP_SUMMARY
+              echo "$var3" >> $GITHUB_STEP_SUMMARY
+            fi
           }
 
           echo -e "x---------------x"

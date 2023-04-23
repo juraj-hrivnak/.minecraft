@@ -22,7 +22,7 @@ function mods_added {
     if [[ ! -z ""$var3"" ]]; then
         echo -e "${GREEN}Added:"
         echo "$var3"
-        echo -e "${GREEN}Added:" >> $GITHUB_STEP_SUMMARY
+        echo 'Added:' >> $GITHUB_STEP_SUMMARY
         echo "$var3" >> $GITHUB_STEP_SUMMARY
     fi
 }
@@ -34,7 +34,7 @@ function mods_removed {
     if [[ ! -z ""$var3"" ]]; then
         echo -e "${RED}Removed:"
         echo "$var3"
-        echo -e "${RED}Removed:" >> $GITHUB_STEP_SUMMARY
+        echo 'Removed:' >> $GITHUB_STEP_SUMMARY
         echo "$var3" >> $GITHUB_STEP_SUMMARY
     fi
 }
