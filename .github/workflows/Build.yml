@@ -92,7 +92,9 @@ jobs:
 
           echo -e "x---------------x"
           echo -e "|  Mod Changes  |"
-          echo "## Mod Changes - Since: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
+          echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
+          echo "- Since tag: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: \`$branch\`" >> $GITHUB_STEP_SUMMARY
           echo '```diff' >> $GITHUB_STEP_SUMMARY
           mods_added
           mods_removed
