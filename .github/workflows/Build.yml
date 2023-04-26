@@ -67,11 +67,10 @@ jobs:
           function mods_added {
             local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
             local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/+ /')
             if [[ ! -z ""$var3"" ]]; then
               echo -e "${GREEN}Added:"
               echo "$var3"
-              echo 'Added:' >> $GITHUB_STEP_SUMMARY
               echo "$var3" >> $GITHUB_STEP_SUMMARY
             fi
           }
@@ -83,7 +82,6 @@ jobs:
             if [[ ! -z ""$var3"" ]]; then
               echo -e "${RED}Removed:"
               echo "$var3"
-              echo 'Removed:' >> $GITHUB_STEP_SUMMARY
               echo "$var3" >> $GITHUB_STEP_SUMMARY
             fi
           }
@@ -91,7 +89,7 @@ jobs:
           echo -e "x---------------x"
           echo -e "|  Mod Changes  |"
           echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
-          echo '```markdown' >> $GITHUB_STEP_SUMMARY
+          echo '```diff' >> $GITHUB_STEP_SUMMARY
           mods_added
           mods_removed
           echo -e "${NC}x---------------x"
