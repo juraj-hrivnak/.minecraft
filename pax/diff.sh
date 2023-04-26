@@ -53,7 +53,5 @@ mods_added
 mods_removed
 echo -e "${NC}x---------------x"
 
-# echo "$(git diff -W $previous_commit $latest_commit -- $manifest)"
-
 # Wait for user response
 read -p "Done! Press any key to continue" x

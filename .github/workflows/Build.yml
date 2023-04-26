@@ -71,7 +71,7 @@ jobs:
           function mods_added {
             local var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
             local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/+ /')
+            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
             if [[ ! -z ""$var3"" ]]; then
               echo -e "${GREEN}Added:"
               echo "$var3"
