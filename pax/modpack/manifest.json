@@ -16,31 +16,12 @@
   "name": "TestModpacke",
   "files": [
     {
-      "projectID": 74072,
-      "fileID": 2902483,
+      "projectID": 248453,
+      "fileID": 2785465,
       "required": true,
       "__meta": {
-        "name": "Tinkers Construct",
-        "dependencies": [
-          74924
-        ]
-      }
-    },
-    {
-      "projectID": 74924,
-      "fileID": 2713386,
-      "required": true,
-      "__meta": {
-        "name": "Mantle",
+        "name": "Shadowfacts' Forgelin",
         "explicit": false
-      }
-    },
-    {
-      "projectID": 238222,
-      "fileID": 4393461,
-      "required": true,
-      "__meta": {
-        "name": "Just Enough Items (JEI)"
       }
     },
     {
@@ -58,6 +39,35 @@
       "__meta": {
         "name": "MixinBooter",
         "explicit": false
+      }
+    },
+    {
+      "projectID": 485654,
+      "fileID": 4430381,
+      "required": true,
+      "__meta": {
+        "name": "Fluidlogged API",
+        "explicit": false
+      }
+    },
+    {
+      "projectID": 557549,
+      "fileID": 4506796,
+      "required": true,
+      "__meta": {
+        "name": "Had Enough Items"
+      }
+    },
+    {
+      "projectID": 574029,
+      "fileID": 4445817,
+      "required": true,
+      "__meta": {
+        "name": "Greenery🌿",
+        "dependencies": [
+          248453,
+          485654
+        ]
       }
     },
     {
