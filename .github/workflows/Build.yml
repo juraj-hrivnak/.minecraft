@@ -68,27 +68,49 @@ jobs:
           GREEN='\033[0;32m'
           NC='\033[0m'
 
-          function mods_added {
-            local var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
-            local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-            local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-            if [[ ! -z ""$var3"" ]]; then
-              echo -e "${GREEN}Added:"
-              echo "$var3"
-              echo 'Added:' >> $GITHUB_STEP_SUMMARY
-              echo "$var3" >> $GITHUB_STEP_SUMMARY
-            fi
-          }
+          function mod_changes {
+            local mods_added_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
+            local mods_added_var2=$(echo "$mods_added_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+            local mods_added_var3=$(echo "$mods_added_var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*')
 
-          function mods_removed {
-            local var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
-            local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-            local var3=$(echo "$var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-            if [[ ! -z ""$var3"" ]]; then
-              echo -e "${RED}Removed:"
-              echo "$var3"
+            local mods_removed_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
+            local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+            local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
+
+            if [[ ! -z ""$mods_added_var3"" ]]; then
+              echo "${GREEN}Added:"
+              echo 'Added:' >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r line1; do
+                local foo=""
+                while IFS= read -r line2; do
+                  foo="${line1//$line2}"
+                  if [[ -z ""$foo"" ]]; then
+                    break
+                  fi
+                done <<< "$mods_removed_var3"
+                if [[ ! -z ""$foo"" ]]; then
+                  echo "- $foo"
+                  echo "- $foo" >> $GITHUB_STEP_SUMMARY
+                fi
+              done <<< "$mods_added_var3"
+            fi
+
+            if [[ ! -z ""$mods_added_var3"" ]]; then
+              echo "${RED}Removed:"
               echo 'Removed:' >> $GITHUB_STEP_SUMMARY
-              echo "$var3" >> $GITHUB_STEP_SUMMARY
+              while IFS= read -r line1; do
+                local foo=""
+                while IFS= read -r line2; do
+                  foo="${line1//$line2}"
+                  if [[ -z ""$foo"" ]]; then
+                    break
+                  fi
+                done <<< "$mods_added_var3"
+                if [[ ! -z ""$foo"" ]]; then
+                  echo "- $foo"
+                  echo "- $foo" >> $GITHUB_STEP_SUMMARY
+                fi
+              done <<< "$mods_removed_var3"
             fi
           }
 
@@ -97,8 +119,7 @@ jobs:
           echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
           echo "Since: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
           echo '```markdown' >> $GITHUB_STEP_SUMMARY
-          mods_added
-          mods_removed
+          mod_changes
           echo -e "${NC}x---------------x"
           echo '```' >> $GITHUB_STEP_SUMMARY
       - name: Rename changelog
