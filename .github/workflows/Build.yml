@@ -79,7 +79,7 @@ jobs:
 
             if [[ ! -z ""$mods_added_var3"" ]]; then
               echo -e "${GREEN}Added:"
-              echo 'Added:' >> $GITHUB_STEP_SUMMARY
+              echo -e "Added:" >> $GITHUB_STEP_SUMMARY
               while IFS= read -r line1; do
                 local foo=""
                 while IFS= read -r line2; do
@@ -89,15 +89,15 @@ jobs:
                   fi
                 done <<< "$mods_removed_var3"
                 if [[ ! -z ""$foo"" ]]; then
-                  echo "- $foo"
+                  echo -e "${GREEN}- $foo"
                   echo "- $foo" >> $GITHUB_STEP_SUMMARY
                 fi
               done <<< "$mods_added_var3"
             fi
 
             if [[ ! -z ""$mods_added_var3"" ]]; then
-              echo -e "\n${RED}Removed:"
-              echo 'Removed:' >> $GITHUB_STEP_SUMMARY
+              echo -e "${RED}Removed:"
+              echo -e "\nRemoved:" >> $GITHUB_STEP_SUMMARY
               while IFS= read -r line1; do
                 local foo=""
                 while IFS= read -r line2; do
@@ -107,7 +107,7 @@ jobs:
                   fi
                 done <<< "$mods_added_var3"
                 if [[ ! -z ""$foo"" ]]; then
-                  echo "- $foo"
+                  echo -e "${RED}- $foo"
                   echo "- $foo" >> $GITHUB_STEP_SUMMARY
                 fi
               done <<< "$mods_removed_var3"

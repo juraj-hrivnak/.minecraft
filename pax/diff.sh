@@ -30,7 +30,7 @@ function mod_changes {
 
     if [[ ! -z ""$mods_added_var3"" ]]; then
         echo -e "${GREEN}Added:"
-        echo 'Added:' >> $GITHUB_STEP_SUMMARY
+        echo -e "Added:" >> $GITHUB_STEP_SUMMARY
         while IFS= read -r line1; do
             local foo=""
             while IFS= read -r line2; do
@@ -40,7 +40,7 @@ function mod_changes {
                 fi
             done <<< "$mods_removed_var3"
             if [[ ! -z ""$foo"" ]]; then
-                echo "- $foo"
+                echo -e "- $foo"
                 echo "- $foo" >> $GITHUB_STEP_SUMMARY
             fi
         done <<< "$mods_added_var3"
@@ -48,7 +48,7 @@ function mod_changes {
 
     if [[ ! -z ""$mods_added_var3"" ]]; then
         echo -e "${RED}Removed:"
-        echo 'Removed:' >> $GITHUB_STEP_SUMMARY
+        echo -e "\nRemoved:" >> $GITHUB_STEP_SUMMARY
         while IFS= read -r line1; do
             local foo=""
             while IFS= read -r line2; do
@@ -58,7 +58,7 @@ function mod_changes {
                 fi
             done <<< "$mods_added_var3"
             if [[ ! -z ""$foo"" ]]; then
-                echo "- $foo"
+                echo -e "- $foo"
                 echo "- $foo" >> $GITHUB_STEP_SUMMARY
             fi
         done <<< "$mods_removed_var3"
@@ -73,7 +73,7 @@ function mod_changes {
 # (?<="files"(.|\s)(.|\s).)[\s\S]*\]
 # "files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*
 
-echo "x---------------x"
-echo "|  Mod Changes  |"
+echo -e "x---------------x"
+echo -e "|  Mod Changes  |"
 mod_changes
 echo -e "${NC}x---------------x"
