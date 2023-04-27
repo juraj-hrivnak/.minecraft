@@ -19,23 +19,23 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-function mods_added {
-    local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
-    local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-    local var3=$(echo "$var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-    if [[ ! -z ""$var3"" ]]; then
-        echo -e "${GREEN}Added:"
-        echo "$var3"
-    fi
-}
+function mod_changes {
+    local mods_added_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local mods_added_var2=$(echo "$mods_added_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+    local mods_added_var3=$(echo "$mods_added_var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
 
-function mods_removed {
-    local var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
-    local var2=$(echo "$var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-    local var3=$(echo "$var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
-    if [[ ! -z ""$var3"" ]]; then
-        echo -e "${RED}Removed:"
-        echo "$var3"
+    local mods_removed_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+    local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+
+    if [[ ! -z ""$mods_added_var3"" ]]; then
+        echo -e "${GREEN}Added:"
+        local mods_added=$(echo "$mods_added_var3\n$mods_removed_var3" | sort | uniq)
+        echo -e ${mods_added}
+    fi
+
+    if [[ ! -z ""$mods_removed_var3"" ]]; then
+        echo -e "${RED}Removed:\n$mods_removed_var3"
     fi
 }
 
@@ -49,8 +49,7 @@ function mods_removed {
 
 echo -e "x---------------x"
 echo -e "|  Mod Changes  |"
-mods_added
-mods_removed
+mod_changes
 echo -e "${NC}x---------------x"
 
 # Wait for user response
