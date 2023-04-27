@@ -22,20 +22,46 @@ NC='\033[0m'
 function mod_changes {
     local mods_added_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
     local mods_added_var2=$(echo "$mods_added_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-    local mods_added_var3=$(echo "$mods_added_var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+    local mods_added_var3=$(echo "$mods_added_var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*')
 
     local mods_removed_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
     local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
-    local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | sed -e 's/^/- /')
+    local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
 
     if [[ ! -z ""$mods_added_var3"" ]]; then
         echo -e "${GREEN}Added:"
-        local mods_added=$(echo "$mods_added_var3\n$mods_removed_var3" | sort | uniq)
-        echo -e ${mods_added}
+        echo 'Added:' >> $GITHUB_STEP_SUMMARY
+        while IFS= read -r line1; do
+            local foo=""
+            while IFS= read -r line2; do
+                foo="${line1//$line2}"
+                if [[ -z ""$foo"" ]]; then
+                    break
+                fi
+            done <<< "$mods_removed_var3"
+            if [[ ! -z ""$foo"" ]]; then
+                echo "- $foo"
+                echo "- $foo" >> $GITHUB_STEP_SUMMARY
+            fi
+        done <<< "$mods_added_var3"
     fi
 
-    if [[ ! -z ""$mods_removed_var3"" ]]; then
-        echo -e "${RED}Removed:\n$mods_removed_var3"
+    if [[ ! -z ""$mods_added_var3"" ]]; then
+        echo -e "${RED}Removed:"
+        echo 'Removed:' >> $GITHUB_STEP_SUMMARY
+        while IFS= read -r line1; do
+            local foo=""
+            while IFS= read -r line2; do
+                foo="${line1//$line2}"
+                if [[ -z ""$foo"" ]]; then
+                    break
+                fi
+            done <<< "$mods_added_var3"
+            if [[ ! -z ""$foo"" ]]; then
+                echo "- $foo"
+                echo "- $foo" >> $GITHUB_STEP_SUMMARY
+            fi
+        done <<< "$mods_removed_var3"
     fi
 }
 
@@ -47,10 +73,7 @@ function mod_changes {
 # (?<="files"(.|\s)(.|\s).)[\s\S]*\]
 # "files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*
 
-echo -e "x---------------x"
-echo -e "|  Mod Changes  |"
+echo "x---------------x"
+echo "|  Mod Changes  |"
 mod_changes
 echo -e "${NC}x---------------x"
-
-# Wait for user response
-read -p "Done! Press any key to continue" x

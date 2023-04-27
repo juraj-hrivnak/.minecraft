@@ -78,7 +78,7 @@ jobs:
             local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
 
             if [[ ! -z ""$mods_added_var3"" ]]; then
-              echo "${GREEN}Added:"
+              echo -e "${GREEN}Added:"
               echo 'Added:' >> $GITHUB_STEP_SUMMARY
               while IFS= read -r line1; do
                 local foo=""
@@ -96,7 +96,7 @@ jobs:
             fi
 
             if [[ ! -z ""$mods_added_var3"" ]]; then
-              echo "${RED}Removed:"
+              echo -e "\n${RED}Removed:"
               echo 'Removed:' >> $GITHUB_STEP_SUMMARY
               while IFS= read -r line1; do
                 local foo=""
