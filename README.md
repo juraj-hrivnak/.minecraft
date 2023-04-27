@@ -31,13 +31,23 @@ This template uses various tools to help you with your modpack development and r
 
 ## Setup
 
-1. Click on the "Use this template" button.
+> **Note**
+> The setup process is still work-in-progress and will be improved in the future.
+
+1. Click on the ["Use this template"] button.
 2. Clone the repository to your modpack folder.
 3. Run the set-up script:
     - If you are on _Windows 10 or higher_, run the `./setup-windows.ps1` with _PowerShell_.
     - If you are on _Linux_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./sh setup-linux.sh`.
     - If you are on _MacOS_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./brew install grep` and after it is finished, run `./sh setup-macos.sh`.
-
+4. Set up secret for the CurseForge API key.
+    1. Go to [curseforge.com/signup] and create an account to get access to their API ([Tutorial](https://docs.curseforge.com/#your-next-steps))
+    2. [Generate an API Key](https://console.curseforge.com/#/api-keys)
+    3. [Create a new Secret for GitHub Actions] wit name `CF_API_KEY` and put the generated key there.
+    > **Note**
+    > CurseForge added the ability for mod authors to restrict downloads from third-party clients. [More info...](https://www.reddit.com/r/feedthebeast/comments/uswnhe/psa_curseforge_has_started_enforcing_restrictions/)
+5. Set up Curseforge releases. ([Tutorial](https://github.com/froehlichA/pax/wiki/Automatic-releases#configuring-curseforge-releases))
+6. Enjoy!
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
@@ -46,3 +56,6 @@ This template uses various tools to help you with your modpack development and r
 [MultiMC]: https://multimc.org/
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
 [GitHub Actions]: .github/workflows
+["Use this template"]: https://github.com/juraj-hrivnak/.minecraft/generate
+[Create a new Secret for GitHub Actions]: https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository
+[curseforge.com/signup]: https://console.curseforge.com/?#/signup

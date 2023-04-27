@@ -18,7 +18,7 @@ on:
         type: string
 
 env:
-  PROJECT_ID: "399664"
+  PROJECT_ID: "123456"
 
 jobs:
   release-github:
