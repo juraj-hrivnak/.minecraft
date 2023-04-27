@@ -33,7 +33,11 @@ This template uses various tools to help you with your modpack development and r
 
 1. Click on the "Use this template" button.
 2. Clone the repository to your modpack folder.
-3. Run the `setup-windows.ps1` (Windows) or `setup-unix.sh` (Linux/MacOS) script located in the `./pax` folder and wait until it's done.
+3. Run the set-up script:
+    - If you are on _Windows 10 or higher_, run the `./setup-windows.ps1` with _PowerShell_.
+    - If you are on _Linux_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./sh setup-linux.sh`.
+    - If you are on _MacOS_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./brew install grep` and after it is finished, run `./sh setup-macos.sh`.
+
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
