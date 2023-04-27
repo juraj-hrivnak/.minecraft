@@ -50,7 +50,8 @@ jobs:
         run: |
           set +e
 
-          manifest="pax/modpack/manifest.json"
+          manifest="./pax/modpack/manifest.json"
+          changelog="./CHANGELOG.md"
 
           branch=$(git rev-parse --abbrev-ref HEAD)
           previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
