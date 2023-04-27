@@ -18,7 +18,7 @@
 /config/jei/worldSettings.cfg
 /config/moresoundconfig.cfg
 
-# Folders in .minecraft
+# .minecraft
 /assetmover/assets/*
 /mods/*
 /resourcepacks/*
@@ -41,6 +41,7 @@
 /craftpresence/*
 /TombManyGraves/*
 /icon.png
+**/*.DS_Store
 
 # Logs
 **/*.log
