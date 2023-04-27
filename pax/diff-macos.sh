@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd ../
-manifest="pax/modpack/manifest.json"
+manifest="./pax/modpack/manifest.json"
+changelog="./CHANGELOG.md"
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
@@ -30,6 +31,7 @@ function mod_changes {
 
     if [[ ! -z ""$mods_added_var3"" ]]; then
         echo "${GREEN}Added:"
+        echo "Added:" >> $changelog
         while IFS= read -r line1; do
             local foo=""
             while IFS= read -r line2; do
@@ -40,12 +42,14 @@ function mod_changes {
             done <<< "$mods_removed_var3"
             if [[ ! -z ""$foo"" ]]; then
                 echo "- $foo"
+                echo "- $foo" >> $changelog
             fi
         done <<< "$mods_added_var3"
     fi
 
-    if [[ ! -z ""$mods_added_var3"" ]]; then
+    if [[ ! -z ""$mods_removed_var3"" ]]; then
         echo "${RED}Removed:"
+        echo "\nRemoved:" >> $changelog
         while IFS= read -r line1; do
             local foo=""
             while IFS= read -r line2; do
@@ -56,6 +60,7 @@ function mod_changes {
             done <<< "$mods_added_var3"
             if [[ ! -z ""$foo"" ]]; then
                 echo "- $foo"
+                echo "- $foo" >> $changelog
             fi
         done <<< "$mods_removed_var3"
     fi
@@ -71,5 +76,13 @@ function mod_changes {
 
 echo "x---------------x"
 echo "|  Mod Changes  |"
+
+echo "\n## Mod Changes\n" >> $changelog
+echo "Since: \`$latest_tag\`\n" >> $changelog
+echo '```markdown' >> $changelog
+
 mod_changes
+
 echo "${NC}x---------------x"
+
+echo '```' >> $changelog

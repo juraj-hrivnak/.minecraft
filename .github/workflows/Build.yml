@@ -80,6 +80,7 @@ jobs:
             if [[ ! -z ""$mods_added_var3"" ]]; then
               echo -e "${GREEN}Added:"
               echo -e "Added:" >> $GITHUB_STEP_SUMMARY
+              echo -e "Added:" >> $changelog
               while IFS= read -r line1; do
                 local foo=""
                 while IFS= read -r line2; do
@@ -91,13 +92,15 @@ jobs:
                 if [[ ! -z ""$foo"" ]]; then
                   echo -e "${GREEN}- $foo"
                   echo "- $foo" >> $GITHUB_STEP_SUMMARY
+                  echo "- $foo" >> $changelog
                 fi
               done <<< "$mods_added_var3"
             fi
 
-            if [[ ! -z ""$mods_added_var3"" ]]; then
+            if [[ ! -z ""$mods_removed_var3"" ]]; then
               echo -e "${RED}Removed:"
               echo -e "\nRemoved:" >> $GITHUB_STEP_SUMMARY
+              echo -e "\nRemoved:" >> $changelog
               while IFS= read -r line1; do
                 local foo=""
                 while IFS= read -r line2; do
@@ -109,6 +112,7 @@ jobs:
                 if [[ ! -z ""$foo"" ]]; then
                   echo -e "${RED}- $foo"
                   echo "- $foo" >> $GITHUB_STEP_SUMMARY
+                  echo "- $foo" >> $changelog
                 fi
               done <<< "$mods_removed_var3"
             fi
@@ -116,12 +120,22 @@ jobs:
 
           echo -e "x---------------x"
           echo -e "|  Mod Changes  |"
+
           echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
           echo "Since: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
           echo '```markdown' >> $GITHUB_STEP_SUMMARY
+
+          echo -e "\n## Mod Changes\n" >> $changelog
+          echo -e "Since: \`$latest_tag\`\n" >> $changelog
+          echo -e '```markdown' >> $changelog
+
           mod_changes
+
           echo -e "${NC}x---------------x"
+
           echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo '```' >> $changelog
       - name: Rename changelog
         run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}.md
       - name: Upload changelog
@@ -141,7 +155,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: changelog
-          path: pax/modpack/CHANGELOG-v${{ needs.modpack-info.outputs.packversion }}-test.md
+          path: pax/modpack
       - name: Sync overrides
         run: |
           cd pax/
