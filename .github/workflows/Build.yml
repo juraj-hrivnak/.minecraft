@@ -141,7 +141,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: changelog
-          path: pax/modpack
+          path: pax/modpack/CHANGELOG-v${{ needs.modpack-info.outputs.packversion }}-test.md
       - name: Sync overrides
         run: |
           cd pax/
