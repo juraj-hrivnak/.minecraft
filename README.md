@@ -39,7 +39,7 @@ This template uses various tools to help you with your modpack development and r
 3. Run the set-up script:
     - If you are on _Windows 10 or higher_, run the `./setup-windows.ps1` with _PowerShell_.
     - If you are on _Linux_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./sh setup-linux.sh`.
-    - If you are on _MacOS_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./brew install grep` and after it is finished, run `./sh setup-macos.sh`.
+    - If you are on _macOS_, open your _terminal_ and use the `./cd` command to move into the `./pax` folder, then run `./brew install grep` and after it is finished, run `./sh setup-macos.sh`.
 4. Set up a GitHub Actions Secret for the CurseForge API key.
     1. Go to [curseforge.com/signup] and create an account to get access to their API. [↗️ Tutorial...](https://docs.curseforge.com/#your-next-steps)
     2. [Generate an API Key](https://console.curseforge.com/#/api-keys)
