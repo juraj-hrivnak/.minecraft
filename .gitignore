@@ -41,11 +41,12 @@
 /craftpresence/*
 /TombManyGraves/*
 /icon.png
-**/*.DS_Store
 
-# Logs
+# Extensions
 **/*.log
 **/*.gz
+**/*.DS_Store
+**/*.jar
 
 # Client data
 /.ReAuth.cfg
