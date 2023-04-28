@@ -7,8 +7,13 @@ changelog="./CHANGELOG.md"
 branch=$(git rev-parse --abbrev-ref HEAD)
 previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
 latest_commit=$(git log -n 1 --pretty=format:"%h" $branch -- $manifest)
-latest_tagged_commit=$(git rev-list --tags --max-count=1)
+latest_tagged_commit=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | sed -n 1p)
 latest_tag=$(git describe --tags --abbrev=0)
+
+# if [ $latest_tag = "v0.0.5" ]; then
+#     latest_tagged_commit=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | sed -n 2p)
+#     latest_tag=$(git describe --tags --abbrev=0 $(git describe --tags --abbrev=0)^)
+# fi
 
 echo "branch: $branch"
 echo "previous commit: $previous_commit"
