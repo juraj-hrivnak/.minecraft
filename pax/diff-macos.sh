@@ -7,13 +7,13 @@ changelog="./CHANGELOG.md"
 branch=$(git rev-parse --abbrev-ref HEAD)
 previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
 latest_commit=$(git log -n 1 --pretty=format:"%h" $branch -- $manifest)
-latest_tagged_commit=$(git rev-list --tags --max-count=1)
 latest_tag=$(git describe --tags --abbrev=0)
+latest_tagged_commit=$(git rev-list -n 1 --pretty=format:"%h" $latest_tag | sed -n 2p)
 
-# if [ $latest_tag = "v0.0.5" ]; then
-#     latest_tagged_commit=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | sed -n 2p)
-#     latest_tag=$(git describe --tags --abbrev=0 $(git describe --tags --abbrev=0)^)
-# fi
+if [ $latest_tagged_commit = $latest_commit ]; then
+    latest_tag=$(git describe --tags --abbrev=0 $(git describe --tags --abbrev=0)^)
+    latest_tagged_commit=$(git rev-list -n 1 --pretty=format:"%h" $latest_tag | sed -n 2p)
+fi
 
 echo "branch: $branch"
 echo "previous commit: $previous_commit"
@@ -26,13 +26,22 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 function mod_changes {
-    local mods_added_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local mods_added_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
     local mods_added_var2=$(echo "$mods_added_var1" | ggrep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
     local mods_added_var3=$(echo "$mods_added_var2" | ggrep '^+' | ggrep -P -o '"name":[\s]*"\K[^"]*')
 
-    local mods_removed_var1=$(git diff -W $previous_commit $latest_commit -- $manifest)
+    local mods_removed_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
     local mods_removed_var2=$(echo "$mods_removed_var1" | ggrep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
     local mods_removed_var3=$(echo "$mods_removed_var2" | ggrep '^-' | ggrep -P -o '"name":[\s]*"\K[^"]*')
+
+    if [[ ! -z ""$mods_added_var3"" ]] || [[ ! -z ""$mods_removed_var3"" ]]; then
+        echo "x---------------x"
+        echo "|  Mod Changes  |"
+
+        echo "\n## Mod Changes\n" >> $changelog
+        echo "Since: \`$latest_tag\`\n" >> $changelog
+        echo '```markdown' >> $changelog
+    fi
 
     if [[ ! -z ""$mods_added_var3"" ]]; then
         echo "${GREEN}Added:"
@@ -69,6 +78,12 @@ function mod_changes {
             fi
         done <<< "$mods_removed_var3"
     fi
+
+    if [[ ! -z ""$mods_added_var3"" ]] || [[ ! -z ""$mods_removed_var3"" ]]; then
+        echo "${NC}x---------------x"
+
+        echo '```' >> $changelog
+    fi
 }
 
 # | grep -P -o '"files":[\s]*\[\K[^\]]*'
@@ -79,15 +94,4 @@ function mod_changes {
 # (?<="files"(.|\s)(.|\s).)[\s\S]*\]
 # "files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*
 
-echo "x---------------x"
-echo "|  Mod Changes  |"
-
-echo "\n## Mod Changes\n" >> $changelog
-echo "Since: \`$latest_tag\`\n" >> $changelog
-echo '```markdown' >> $changelog
-
 mod_changes
-
-echo "${NC}x---------------x"
-
-echo '```' >> $changelog

@@ -58,12 +58,12 @@ jobs:
           branch=$(git rev-parse --abbrev-ref HEAD)
           previous_commit=$(git log -n 1 --skip 1 --pretty=format:"%h" -- $manifest)
           latest_commit=$(git log -n 1 --pretty=format:"%h" $branch -- $manifest)
-          latest_tagged_commit=$(git rev-list --tags --max-count=1)
           latest_tag=$(git describe --tags --abbrev=0)
+          latest_tagged_commit=$(git rev-list -n 1 --pretty=format:"%h" $latest_tag | sed -n 2p)
 
-          if [ $latest_tag = ${{ steps.version.outputs.tag }} ]; then
-              latest_tagged_commit=$(git for-each-ref --sort=-taggerdate --format '%(objectname)' refs/tags | sed -n 2p)
+          if [ $latest_tagged_commit = $latest_commit ]; then
               latest_tag=$(git describe --tags --abbrev=0 $(git describe --tags --abbrev=0)^)
+              latest_tagged_commit=$(git rev-list -n 1 --pretty=format:"%h" $latest_tag | sed -n 2p)
           fi
 
           echo "branch: $branch"
@@ -84,6 +84,19 @@ jobs:
             local mods_removed_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
             local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
             local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
+
+            if [[ ! -z ""$mods_added_var3"" ]] || [[ ! -z ""$mods_removed_var3"" ]]; then
+              echo -e "x---------------x"
+              echo -e "|  Mod Changes  |"
+
+              echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
+              echo "Since: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
+              echo '```markdown' >> $GITHUB_STEP_SUMMARY
+
+              echo -e "\n## Mod Changes\n" >> $changelog
+              echo -e "Since: \`$latest_tag\`\n" >> $changelog
+              echo -e '```markdown' >> $changelog
+            fi
 
             if [[ ! -z ""$mods_added_var3"" ]]; then
               echo -e "${GREEN}Added:"
@@ -124,26 +137,18 @@ jobs:
                 fi
               done <<< "$mods_removed_var3"
             fi
+
+            if [[ ! -z ""$mods_added_var3"" ]] || [[ ! -z ""$mods_removed_var3"" ]]; then
+              echo -e "${NC}x---------------x"
+
+              echo '```' >> $GITHUB_STEP_SUMMARY
+
+              echo '```' >> $changelog
+            fi
           }
-
-          echo -e "x---------------x"
-          echo -e "|  Mod Changes  |"
-
-          echo '## Mod Changes' >> $GITHUB_STEP_SUMMARY
-          echo "Since: \`$latest_tag\`" >> $GITHUB_STEP_SUMMARY
-          echo '```markdown' >> $GITHUB_STEP_SUMMARY
-
-          echo -e "\n## Mod Changes\n" >> $changelog
-          echo -e "Since: \`$latest_tag\`\n" >> $changelog
-          echo -e '```markdown' >> $changelog
 
           mod_changes
 
-          echo -e "${NC}x---------------x"
-
-          echo '```' >> $GITHUB_STEP_SUMMARY
-
-          echo '```' >> $changelog
       - name: Rename changelog
         run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}.md
       - name: Upload changelog
