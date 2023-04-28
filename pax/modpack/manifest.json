@@ -16,50 +16,11 @@
   "name": "TestModpacke",
   "files": [
     {
-      "projectID": 248453,
-      "fileID": 2785465,
-      "required": true,
-      "__meta": {
-        "name": "Shadowfacts' Forgelin",
-        "explicit": false
-      }
-    },
-    {
       "projectID": 253449,
       "fileID": 2568751,
       "required": true,
       "__meta": {
         "name": "Hwyla"
-      }
-    },
-    {
-      "projectID": 303657,
-      "fileID": 2704824,
-      "required": true,
-      "__meta": {
-        "name": "Kiwi 🥝 (Forge)",
-        "explicit": false
-      }
-    },
-    {
-      "projectID": 303694,
-      "fileID": 2932722,
-      "required": true,
-      "__meta": {
-        "name": "Cuisine 🍳",
-        "dependencies": [
-          306770,
-          303657
-        ]
-      }
-    },
-    {
-      "projectID": 306770,
-      "fileID": 3162874,
-      "required": true,
-      "__meta": {
-        "name": "Patchouli",
-        "explicit": false
       }
     },
     {
@@ -72,32 +33,11 @@
       }
     },
     {
-      "projectID": 485654,
-      "fileID": 4430381,
-      "required": true,
-      "__meta": {
-        "name": "Fluidlogged API",
-        "explicit": false
-      }
-    },
-    {
       "projectID": 557549,
       "fileID": 4506796,
       "required": true,
       "__meta": {
         "name": "Had Enough Items"
-      }
-    },
-    {
-      "projectID": 574029,
-      "fileID": 4445817,
-      "required": true,
-      "__meta": {
-        "name": "Greenery🌿",
-        "dependencies": [
-          248453,
-          485654
-        ]
       }
     },
     {
@@ -122,14 +62,6 @@
           419286,
           624243
         ]
-      }
-    },
-    {
-      "projectID": 840576,
-      "fileID": 4490966,
-      "required": true,
-      "__meta": {
-        "name": "Oceanic Expanse"
       }
     }
   ]
