@@ -16,11 +16,20 @@
   "name": "TestModpacke",
   "files": [
     {
-      "projectID": 238856,
-      "fileID": 2950248,
+      "projectID": 231951,
+      "fileID": 2974106,
       "required": true,
       "__meta": {
-        "name": "Better Questing"
+        "name": "Immersive Engineering"
+      }
+    },
+    {
+      "projectID": 237167,
+      "fileID": 2985811,
+      "required": true,
+      "__meta": {
+        "name": "FTB Library (Forge) (Legacy)",
+        "explicit": false
       }
     },
     {
@@ -29,6 +38,27 @@
       "required": true,
       "__meta": {
         "name": "Hwyla"
+      }
+    },
+    {
+      "projectID": 289412,
+      "fileID": 3156637,
+      "required": true,
+      "__meta": {
+        "name": "FTB Quests (Forge)",
+        "dependencies": [
+          237167,
+          309674
+        ]
+      }
+    },
+    {
+      "projectID": 309674,
+      "fileID": 3003364,
+      "required": true,
+      "__meta": {
+        "name": "Item Filters",
+        "explicit": false
       }
     },
     {
