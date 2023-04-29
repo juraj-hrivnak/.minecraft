@@ -78,11 +78,11 @@ jobs:
 
           function mod_changes {
             local mods_added_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
-            local mods_added_var2=$(echo "$mods_added_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+            local mods_added_var2=$(echo "$mods_added_var1" | grep -P -o -z '"files":[\s]*\K\[((?!.)[\s\S]*\])*' | tr -d '\0')
             local mods_added_var3=$(echo "$mods_added_var2" | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*')
 
             local mods_removed_var1=$(git diff -W $latest_tagged_commit $latest_commit -- $manifest)
-            local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\[\K((?!.)[\s\S]*\}[\s]*\])*' | tr -d '\0')
+            local mods_removed_var2=$(echo "$mods_removed_var1" | grep -P -o -z '"files":[\s]*\K\[((?!.)[\s\S]*\])*' | tr -d '\0')
             local mods_removed_var3=$(echo "$mods_removed_var2" | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
 
             if [[ ! -z ""$mods_added_var3"" ]] || [[ ! -z ""$mods_removed_var3"" ]]; then
