@@ -14,5 +14,93 @@
   "version": "1.0.0",
   "author": "TemplateModpackAuthor",
   "name": "TestModpacke",
-  "files": []
+  "files": [
+    {
+      "projectID": 231951,
+      "fileID": 2974106,
+      "required": true,
+      "__meta": {
+        "name": "Immersive Engineering"
+      }
+    },
+    {
+      "projectID": 237167,
+      "fileID": 2985811,
+      "required": true,
+      "__meta": {
+        "name": "FTB Library (Forge) (Legacy)",
+        "explicit": false
+      }
+    },
+    {
+      "projectID": 253449,
+      "fileID": 2568751,
+      "required": true,
+      "__meta": {
+        "name": "Hwyla"
+      }
+    },
+    {
+      "projectID": 289412,
+      "fileID": 3156637,
+      "required": true,
+      "__meta": {
+        "name": "FTB Quests (Forge)",
+        "dependencies": [
+          237167,
+          309674
+        ]
+      }
+    },
+    {
+      "projectID": 309674,
+      "fileID": 3003364,
+      "required": true,
+      "__meta": {
+        "name": "Item Filters",
+        "explicit": false
+      }
+    },
+    {
+      "projectID": 419286,
+      "fileID": 4459218,
+      "required": true,
+      "__meta": {
+        "name": "MixinBooter",
+        "explicit": false
+      }
+    },
+    {
+      "projectID": 557549,
+      "fileID": 4506796,
+      "required": true,
+      "__meta": {
+        "name": "Had Enough Items"
+      }
+    },
+    {
+      "projectID": 624243,
+      "fileID": 4475780,
+      "required": true,
+      "__meta": {
+        "name": "ModularUI",
+        "explicit": false,
+        "dependencies": [
+          419286
+        ]
+      }
+    },
+    {
+      "projectID": 632327,
+      "fileID": 4502668,
+      "required": true,
+      "__meta": {
+        "name": "Inventory Bogo Sorter",
+        "dependencies": [
+          419286,
+          624243
+        ]
+      }
+    }
+  ]
 }
