@@ -15,6 +15,13 @@
   "author": "TemplateModpackAuthor",
   "name": "TestModpacke",
   "files": [
-
+    {
+      "projectID": 231951,
+      "fileID": 2974166,
+      "required": true,
+      "__meta": {
+        "name": "Immersive Engineering"
+      }
+    }
   ]
 }
