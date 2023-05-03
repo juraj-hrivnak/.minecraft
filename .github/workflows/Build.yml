@@ -53,6 +53,7 @@ jobs:
           set +e
 
           curl https://github.com/josephburnett/jd/releases/download/v1.7.1/jd-amd64-linux -o ./pax/jd -L -J
+          sudo chmod +x ./pax/jd
 
           manifest="./pax/modpack/manifest.json"
           changelog="./CHANGELOG.md"
