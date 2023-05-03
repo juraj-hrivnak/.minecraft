@@ -72,8 +72,10 @@
 /pax/libcrypto-1_1.dll
 /pax/libssl-1_1-x64.dll
 /pax/libssl-1_1.dll
-/pax/pax.exe
+/pax/jd
 /pax/pax
+/pax/pax.exe
+/pax/pax-macos
 /pax/modpack/overrides/config/*
 /pax/modpack/overrides/local/*
 /pax/modpack/overrides/oresources/*
