@@ -14,7 +14,8 @@ An easy-to-use template for an automated modpack development environment.
 - **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
 - **🧬 CI/CD** using **[GitHub Actions]**.
   - **📤 Automatically deploy** to CurseForge and GitHub in about 5 minutes.
-  - **🗃️ Development builds**.
+  - **📃 Automatically generate mod changelog**.
+  - **🗃️ Share development builds**.
   - **⚙️ Close issues** with the 'fixed in dev' label on release.
 
 ## How It Works
