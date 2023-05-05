@@ -27,8 +27,8 @@ BLUE='\033[0;36m'
 NC='\033[0m'
 
 git show $latest_tagged_commit:$manifest > ./pax/modpack/manifest_prev.json
-mods_removed_raw=$(./pax/jd -set ./pax/modpack/manifest_prev.json $manifest | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*')
-mods_added_raw=$(./pax/jd -set ./pax/modpack/manifest_prev.json $manifest | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*')
+mods_removed_raw=$(./pax/jd -set ./pax/modpack/manifest_prev.json $manifest | grep '^-' | grep -P -o '"name":[\s]*"\K[^"]*' | tr -d '\[\]')
+mods_added_raw=$(./pax/jd -set ./pax/modpack/manifest_prev.json $manifest | grep '^+' | grep -P -o '"name":[\s]*"\K[^"]*' | tr -d '\[\]')
 
 mods_added=""
 mods_removed=""
