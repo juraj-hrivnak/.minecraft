@@ -50,12 +50,12 @@ This template uses various tools to help you with your modpack development and r
     4. [Create a new Secret for GitHub Actions] with name `CF_API_TOKEN`, and for the value, paste your previously copied secret.
     5. Open an editor with the CD config file (located at [.github/workflows/Release.yml](https://github.com/juraj-hrivnak/.minecraft/blob/main/.github/workflows/Release.yml#L29) in your project folder).
     6. Locate the `PROJECT_ID` env variable.
-      ```
+      ```yml
       env:
         PROJECT_ID: "123456"
       ```
     7. Change the value to your modpack project ID.
-      ```
+      ```yml
       env:
         PROJECT_ID: "443254" # If your Curseforge page shows 443254 as the Project ID.
       ```
