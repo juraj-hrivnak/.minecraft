@@ -42,7 +42,7 @@ This template uses various tools to help you with your modpack development and r
     - If you are on _Linux_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `sh setup-linux.sh`.
     - If you are on _macOS_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `brew install grep` and after it is finished, run `sh setup-macos.sh`.
 
-4. Set up automatic releases using a CurseForge API token.
+4. Set up automatic releases using a CurseForge API token. (Can be done later or skipped if you don't wish to have releases automated.)
     1. Navigate to [curseforge.com/account/api-tokens](https://curseforge.com/account/api-tokens).
     2. Enter a name for your token and hit the "Generate Token" button.
       ![new_token](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/1718613a-8994-4102-a2a2-aff7939d36ad)
