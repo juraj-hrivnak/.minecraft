@@ -48,7 +48,7 @@ This template uses various tools to help you with your modpack development and r
     3. Copy your generated secret (the jumbled mess of numbers, letters and dashes).
       ![new_token_copy](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/5c8cd169-5249-40b0-bd23-f42926c88789)
     4. [Create a new Secret for GitHub Actions] with name `CF_API_TOKEN`, and for the value, paste your previously copied secret.
-    5. Open an editor with the CD config file (located at [.github/workflows/Release.yml](https://github.com/juraj-hrivnak/.minecraft/blob/main/.github/workflows/Release.yml#L29) in your project folder).
+    5. Open an editor with the CD config file (located at [.github/workflows/Release.yml](.github/workflows/Release.yml#L28C1-L29) in your project folder).
     6. Locate the `PROJECT_ID` env variable.
       ```yml
       env:
