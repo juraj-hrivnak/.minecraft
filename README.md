@@ -28,7 +28,7 @@ This template uses various tools to help you with your modpack development and r
 
 - **Development** uses: **[PAX]** to manage mods, and **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json`.
 
-![Development_02](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/52fd20fa-ab08-4b01-8c3a-d23241d8b07e)
+![Development_03](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/e01a9f4d-176a-48cf-939a-c4c006bce5e0)
 
 ## Setup
 
