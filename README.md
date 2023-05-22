@@ -1,4 +1,4 @@
-# .minecraft Modpack Template
+# .minecraft
 
 [![Build](https://github.com/juraj-hrivnak/.minecraft/actions/workflows/Build.yml/badge.svg)](https://github.com/juraj-hrivnak/.minecraft/actions/workflows/Build.yml)
 
