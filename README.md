@@ -23,7 +23,7 @@ An easy-to-use template for an automated modpack development environment.
 This template uses various tools to help you with your modpack development and release process.
 
 - **Release** uses: **[PAX]** to export the modpack as zip, **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json`, and **[ServerPackCreator]** to remove client-side mods and create the server pack.
-  - Modpack can be released using GitHub actions. (Recommended) Which requires a CurseForge API token.
+  - Modpack can be released using GitHub actions, which requires a CurseForge API token. (Recommended)
   - Or it can be exported locally and then released on CurseForge manually. (Not recommended)
 
 - **Development** uses: **[PAX]** to manage mods, and **[ModpackDownloader]** to download mod `.jar`'s and other files from `manifest.json`.
