@@ -236,14 +236,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Download Mods
         run: |
-          mkdir ${GITHUB_WORKSPACE}/downloader
           cd pax/
           modpack_downloader_version=$(grep -Po '(?<="ModpackDownloader": ")[^"]*' setup.json)
           curl https://github.com/Joshyx/ModpackDownloader/releases/download/v$modpack_downloader_version/ModpackDownloader-$modpack_downloader_version.jar -o ModpackDownloader-$modpack_downloader_version.jar -L -J
-          java -jar ModpackDownloader-$modpack_downloader_version.jar modpack downloader
-          cd ../downloader/mods
-          find . -type f -name '*.zip' -exec rm {} +
-          mv ../mods ../../mods
+          java -jar ModpackDownloader-$modpack_downloader_version.jar modpack ..
       - name: Export serverpack
         run: |
           cd pax/
