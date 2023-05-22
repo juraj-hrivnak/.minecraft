@@ -245,7 +245,7 @@ jobs:
           cd pax/
           server_pack_creator_version=$(grep -Po '(?<="ServerPackCreator": ")[^"]*' setup.json)
           cd serverpack/
-          curl https://github.com/Griefed/ServerPackCreator/releases/download/$server_pack_creator_version/ServerPackCreator-$server_pack_creator_version.jar -o ./serverpack/ServerPackCreator-$server_pack_creator_version.jar -L -J
+          curl https://github.com/Griefed/ServerPackCreator/releases/download/$server_pack_creator_version/ServerPackCreator-$server_pack_creator_version.jar -o ServerPackCreator-$server_pack_creator_version.jar -L -J
           java -jar ServerPackCreator-$server_pack_creator_version.jar -cli
       - name: Rename zip
         run: |
