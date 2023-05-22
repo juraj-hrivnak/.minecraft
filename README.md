@@ -41,20 +41,18 @@ This template uses various tools to help you with your modpack development and r
     - If you are on _Windows 10 or higher_, run the `./pax/setup-windows.ps1` with _PowerShell_.
     - If you are on _Linux_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `sh setup-linux.sh`.
     - If you are on _macOS_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `brew install grep` and after it is finished, run `sh setup-macos.sh`.
+
 4. Set up automatic releases using a CurseForge API token.
     1. Navigate to [curseforge.com/account/api-tokens](https://curseforge.com/account/api-tokens).
     2. Enter a name for your token and hit the "Generate Token" button.
       ![new_token](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/1718613a-8994-4102-a2a2-aff7939d36ad)
+      
     3. Copy your generated secret (the jumbled mess of numbers, letters and dashes).
       ![new_token_copy](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/5c8cd169-5249-40b0-bd23-f42926c88789)
+      
     4. [Create a new Secret for GitHub Actions] with name `CF_API_TOKEN`, and for the value, paste your previously copied secret.
     5. Open an editor with the CD config file (located at [.github/workflows/Release.yml](.github/workflows/Release.yml#L28C1-L29) in your project folder).
-    6. Locate the `PROJECT_ID` env variable.
-      ```yml
-      env:
-        PROJECT_ID: "123456"
-      ```
-    7. Change the value to your modpack project ID.
+    6. Locate the `PROJECT_ID` env variable and change the value to your modpack project ID.
       ```yml
       env:
         PROJECT_ID: "443254" # If your Curseforge page shows 443254 as the Project ID.
