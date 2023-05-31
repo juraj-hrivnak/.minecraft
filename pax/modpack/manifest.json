@@ -16,11 +16,137 @@
   "name": "TestModpacke",
   "files": [
     {
-      "projectID": 231951,
-      "fileID": 2974106,
+      "projectID": 227449,
+      "fileID": 2514484,
       "required": true,
       "__meta": {
-        "name": "Immersive Engineering"
+        "name": "TNTUtils"
+      }
+    },
+    {
+      "projectID": 227795,
+      "fileID": 2823030,
+      "required": true,
+      "__meta": {
+        "name": "Antique Atlas"
+      }
+    },
+    {
+      "projectID": 228027,
+      "fileID": 3647708,
+      "required": true,
+      "__meta": {
+        "name": "BiblioCraft"
+      }
+    },
+    {
+      "projectID": 228525,
+      "fileID": 2836960,
+      "required": true,
+      "__meta": {
+        "name": "Bookshelf"
+      }
+    },
+    {
+      "projectID": 228815,
+      "fileID": 2699055,
+      "required": true,
+      "__meta": {
+        "name": "OpenModsLib"
+      }
+    },
+    {
+      "projectID": 228816,
+      "fileID": 2699056,
+      "required": true,
+      "__meta": {
+        "name": "OpenBlocks",
+        "dependencies": [
+          228815
+        ]
+      }
+    },
+    {
+      "projectID": 228895,
+      "fileID": 3112142,
+      "required": true,
+      "__meta": {
+        "name": "BiomeTweaker"
+      }
+    },
+    {
+      "projectID": 229302,
+      "fileID": 3769828,
+      "required": true,
+      "__meta": {
+        "name": "Custom Loading Screen"
+      }
+    },
+    {
+      "projectID": 229708,
+      "fileID": 3093852,
+      "required": true,
+      "__meta": {
+        "name": "Farseek"
+      }
+    },
+    {
+      "projectID": 229769,
+      "fileID": 3109315,
+      "required": true,
+      "__meta": {
+        "name": "Streams",
+        "dependencies": [
+          229708
+        ]
+      }
+    },
+    {
+      "projectID": 229876,
+      "fileID": 2483393,
+      "required": true,
+      "__meta": {
+        "name": "BetterFps"
+      }
+    },
+    {
+      "projectID": 230497,
+      "fileID": 2450900,
+      "required": true,
+      "__meta": {
+        "name": "Chameleon"
+      }
+    },
+    {
+      "projectID": 231095,
+      "fileID": 2720655,
+      "required": true,
+      "__meta": {
+        "name": "Chisels & Bits - For Forge"
+      }
+    },
+    {
+      "projectID": 322506,
+      "fileID": 4518717,
+      "required": true,
+      "__meta": {
+        "name": "BSL Shaders"
+      }
+    },
+    {
+      "projectID": 544096,
+      "fileID": 4278029,
+      "required": true,
+      "__meta": {
+        "name": "Sildur's Vibrant shaders"
+      }
+    },
+    {
+      "projectID": 627557,
+      "fileID": 4504977,
+      "required": true,
+      "__meta": {
+        "name": "Complementary Reimagined"
       }
     }
   ]
