@@ -49,7 +49,7 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: CHANGELOG-${{ inputs.tag }}.md
+          body_path: CHANGELOG-${{ inputs.tag }}${{ inputs.buildlabel }}.md
           files: |
             ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}.zip
             ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}-Server-Pack.zip

@@ -192,12 +192,12 @@ jobs:
           rm ./pax/modpack/manifest_prev.json
 
       - name: Rename changelog
-        run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}.md
+        run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}${{ steps.build.outputs.buildlabel }}.md
       - name: Upload changelog
         uses: actions/upload-artifact@v3
         with:
           name: changelog
-          path: CHANGELOG-v${{ steps.info.outputs.packversion }}.md
+          path: CHANGELOG-v${{ steps.info.outputs.packversion }}${{ steps.build.outputs.buildlabel }}.md
 
   build-modpack:
     name: Build Modpack
