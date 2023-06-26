@@ -186,7 +186,9 @@ jobs:
             mod_changes+="\`\`\`"
           fi
 
-          echo -e "$mod_changes" >> $GITHUB_STEP_SUMMARY
+          if [[ ! -z ""$mod_changes"" ]]; then
+            echo -e "$mod_changes" >> $GITHUB_STEP_SUMMARY
+          fi
           perl -i -pe "s/\@mod_changes\@/$mod_changes/g" $changelog
 
           rm ./pax/modpack/manifest_prev.json
@@ -198,14 +200,6 @@ jobs:
         with:
           name: changelog
           path: CHANGELOG-${{ steps.version.outputs.tag }}${{ steps.build.outputs.buildlabel }}.md
-      - name: Get mod changes
-        shell: bash
-        run: |
-          set +e
-
-          manifest="./pax/modpack/manifest.json"
-
-          perl -i -pe "s/\@version\@/${{ steps.version.outputs.tag }}/g" $manifest
 
   build-modpack:
     name: Build Modpack
@@ -224,7 +218,14 @@ jobs:
           cd pax/
           chmod +x ./sync_overrides.sh
           ./sync_overrides.sh
+      - name: Replace version
         shell: bash
+        run: |
+          set +e
+
+          manifest="./pax/modpack/manifest.json"
+
+          perl -i -pe "s/\@version\@/${{ needs.modpack-info.outputs.tag }}/g" $manifest
       - name: Export modpack
         run: |
           cd pax/
