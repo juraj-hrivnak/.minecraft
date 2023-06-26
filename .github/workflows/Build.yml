@@ -192,12 +192,20 @@ jobs:
           rm ./pax/modpack/manifest_prev.json
 
       - name: Rename changelog
-        run: mv CHANGELOG.md CHANGELOG-v${{ steps.info.outputs.packversion }}${{ steps.build.outputs.buildlabel }}.md
+        run: mv CHANGELOG.md CHANGELOG-${{ steps.version.outputs.tag }}${{ steps.build.outputs.buildlabel }}.md
       - name: Upload changelog
         uses: actions/upload-artifact@v3
         with:
           name: changelog
-          path: CHANGELOG-v${{ steps.info.outputs.packversion }}${{ steps.build.outputs.buildlabel }}.md
+          path: CHANGELOG-${{ steps.version.outputs.tag }}${{ steps.build.outputs.buildlabel }}.md
+      - name: Get mod changes
+        shell: bash
+        run: |
+          set +e
+
+          manifest="./pax/modpack/manifest.json"
+
+          perl -i -pe "s/\@version\@/${{ steps.version.outputs.tag }}/g" $manifest
 
   build-modpack:
     name: Build Modpack
@@ -225,12 +233,12 @@ jobs:
           sudo chmod +x ./pax
           ./pax export
       - name: Rename zip
-        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}.zip
+        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: modpack
-          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}.zip
+          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}.zip
 
   build-serverpack:
     name: Build Serverpack
@@ -254,12 +262,12 @@ jobs:
           java -jar ServerPackCreator-$server_pack_creator_version.jar -cli
       - name: Rename zip
         run: |
-          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
+          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: serverpack
-          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
+          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
 
   release:
     name: Release
