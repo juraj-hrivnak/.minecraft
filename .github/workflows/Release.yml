@@ -16,14 +16,6 @@ on:
       buildlabel:
         required: true
         type: string
-      release_github:
-        required: false
-        type: boolean
-        default: true
-      release_curseforge:
-        required: false
-        type: boolean
-        default: true
 
 env:
   PROJECT_ID: "123456"
@@ -31,7 +23,6 @@ env:
 jobs:
   release-github:
     name: Deploy to GitHub
-    if: ${{ github.event.inputs.release_github == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Download modpack
@@ -59,7 +50,6 @@ jobs:
 
   release-curseforge:
     name: Deploy to CurseForge
-    if: ${{ github.event.inputs.release_curseforge == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check if CF_API_TOKEN exist
