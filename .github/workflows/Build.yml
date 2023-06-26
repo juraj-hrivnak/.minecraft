@@ -7,9 +7,6 @@ on:
       - 'v*'
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   modpack-info:
@@ -20,6 +17,7 @@ jobs:
       packversion: ${{ steps.info.outputs.packversion }}
       mcversion: ${{ steps.info.outputs.mcversion }}
       tag: ${{ steps.version.outputs.tag }}
+      buildlabel: ${{ steps.build.outputs.buildlabel }}
     steps:
       - name: Checkout with fetch depth 2
         uses: actions/checkout@v3
@@ -43,6 +41,19 @@ jobs:
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
           fallback: tag_not_found
+      - name: Create build label
+        id: build
+        shell: bash
+        run: |
+          set +e
+
+          latest_tag=$(git describe --tags --abbrev=0)
+
+          if [ $latest_tag = ${{ steps.version.outputs.tag }} ]; then
+            echo "buildlabel=" >> $GITHUB_OUTPUT
+          else
+            echo "buildlabel=-build.${{ github.run_number }}" >> $GITHUB_OUTPUT
+          fi
       - name: Checkout with fetch depth 0
         uses: actions/checkout@v3
         with:
@@ -214,12 +225,12 @@ jobs:
           sudo chmod +x ./pax
           ./pax export
       - name: Rename zip
-        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}.zip
+        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: modpack
-          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}.zip
+          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}.zip
 
   build-serverpack:
     name: Build Serverpack
@@ -243,12 +254,12 @@ jobs:
           java -jar ServerPackCreator-$server_pack_creator_version.jar -cli
       - name: Rename zip
         run: |
-          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}-Server-Pack.zip
+          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: serverpack
-          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}-build.${{ github.run_number }}-Server-Pack.zip
+          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-v${{ needs.modpack-info.outputs.packversion }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
 
   release:
     name: Release
@@ -259,5 +270,5 @@ jobs:
       projectname: ${{ needs.modpack-info.outputs.projectname }}
       mcversion: ${{ needs.modpack-info.outputs.mcversion }}
       tag: ${{ needs.modpack-info.outputs.tag }}
-      build: ${{ github.run_number }}
+      buildlabel: ${{ needs.modpack-info.outputs.buildlabel }}
     secrets: inherit
