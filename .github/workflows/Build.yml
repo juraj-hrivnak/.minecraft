@@ -184,6 +184,8 @@ jobs:
           if [[ ! -z ""$mod_changes"" ]]; then
             echo -e "$mod_changes" >> $GITHUB_STEP_SUMMARY
           fi
+
+          mod_changes=$(echo $mod_changes | sed -r 's/[/]+/\\\//g')
           perl -i -pe "s/\@mod_changes\@/$mod_changes/g" $changelog
 
           rm ./pax/modpack/manifest_prev.json
