@@ -7,13 +7,13 @@ on:
       projectname:
         required: true
         type: string
+      projectsuffix:
+        required: true
+        type: string
       mcversion:
         required: true
         type: string
       tag:
-        required: true
-        type: string
-      projectsuffix:
         required: true
         type: string
 

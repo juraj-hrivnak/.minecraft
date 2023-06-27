@@ -213,11 +213,6 @@ jobs:
         with:
           name: changelog
           path: pax/modpack
-      - name: Sync overrides
-        run: |
-          cd pax/
-          chmod +x ./sync_overrides.sh
-          ./sync_overrides.sh
       - name: Replace version
         shell: bash
         run: |
@@ -226,6 +221,11 @@ jobs:
           manifest="./pax/modpack/manifest.json"
 
           perl -i -pe "s/\@version\@/${{ needs.modpack-info.outputs.projectsuffix }}/g" $manifest
+      - name: Sync overrides
+        run: |
+          cd pax/
+          chmod +x ./sync_overrides.sh
+          ./sync_overrides.sh
       - name: Export modpack
         run: |
           cd pax/
@@ -277,7 +277,7 @@ jobs:
     uses: ./.github/workflows/Release.yml
     with:
       projectname: ${{ needs.modpack-info.outputs.projectname }}
+      projectsuffix: ${{ needs.modpack-info.outputs.projectsuffix }}
       mcversion: ${{ needs.modpack-info.outputs.mcversion }}
       tag: ${{ needs.modpack-info.outputs.tag }}
-      projectsuffix: ${{ needs.modpack-info.outputs.projectsuffix }}
     secrets: inherit
