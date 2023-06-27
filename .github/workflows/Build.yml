@@ -8,6 +8,12 @@ on:
     branches:
       - main
 
+concurrency:
+  group: build-and-test
+
+  # If this is enabled it will cancel current running and start latest
+  cancel-in-progress: true
+
 jobs:
   modpack-info:
     name: Modpack Info
@@ -185,7 +191,7 @@ jobs:
             echo -e "$mod_changes" >> $GITHUB_STEP_SUMMARY
           fi
 
-          mod_changes=$(echo $mod_changes | sed -r 's/[/]+/\\\//g')
+          mod_changes=$(echo $mod_changes | sed -r 's/[/]/\\\//g')
           perl -i -pe "s/\@mod_changes\@/$mod_changes/g" $changelog
 
           rm ./pax/modpack/manifest_prev.json
