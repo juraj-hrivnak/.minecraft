@@ -9,9 +9,7 @@ on:
       - main
 
 concurrency:
-  group: build-and-test
-
-  # If this is enabled it will cancel current running and start latest
+  group: Build
   cancel-in-progress: true
 
 jobs:
