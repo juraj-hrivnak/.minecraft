@@ -37,7 +37,7 @@ jobs:
             echo "::error::Could not find manifest.json" && exit 1
           fi
           manifestjson=`cat pax/modpack/manifest.json`
-          latest_tag=`git describe --tags --abbrev=0`
+          latest_tag=$(git describe --tags --abbrev=0)
 
           projectname=`echo $(jq -r '.name' <<< "$manifestjson")`
           echo "projectname=$projectname" >> $GITHUB_OUTPUT
@@ -46,7 +46,7 @@ jobs:
           echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
 
           if [ $latest_tag = ${{ steps.version.outputs.tag }} ]; then
-            echo "projectsuffix=$latest_tag" >> $GITHUB_OUTPUT
+            echo "projectsuffix=${{ steps.version.outputs.tag }}" >> $GITHUB_OUTPUT
           else
             echo "projectsuffix=build.${{ github.run_number }}" >> $GITHUB_OUTPUT
           fi
