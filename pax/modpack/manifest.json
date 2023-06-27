@@ -134,41 +134,11 @@
       }
     },
     {
-      "projectID": 456403,
-      "fileID": 4528552,
-      "required": true,
-      "__meta": {
-        "name": "Forgelin-Continuous",
-        "explicit": false
-      }
-    },
-    {
-      "projectID": 485654,
-      "fileID": 4564413,
-      "required": true,
-      "__meta": {
-        "name": "Fluidlogged API",
-        "explicit": false
-      }
-    },
-    {
       "projectID": 544096,
       "fileID": 4278029,
       "required": true,
       "__meta": {
         "name": "Sildur's Vibrant shaders"
-      }
-    },
-    {
-      "projectID": 574029,
-      "fileID": 4544741,
-      "required": true,
-      "__meta": {
-        "name": "Greenery🌿",
-        "dependencies": [
-          485654,
-          456403
-        ]
       }
     },
     {

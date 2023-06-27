@@ -141,7 +141,7 @@ jobs:
             echo -e "|  Mod Changes  |"
 
             mod_changes+="## Mod Changes\n\n"
-            mod_changes+="Since: \`$latest_tag\`\n\n"
+            mod_changes+="Since: [\`$latest_tag\`](https://github.com/${{ github.repository }}/releases/tag/$latest_tag)\n\n"
             mod_changes+="\`\`\`markdown\n"
           fi
 

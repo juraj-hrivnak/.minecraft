@@ -2,6 +2,6 @@
 
 ## What's new?
 
-- Test
+- Test2
 
 @mod_changes@
