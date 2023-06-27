@@ -29,7 +29,10 @@ jobs:
           fallback: tag_not_found
       - name: Get modpack info
         id: info
+        shell: bash
         run: |
+          set +e
+
           if [ ! -f pax/modpack/manifest.json ]; then
             echo "::error::Could not find manifest.json" && exit 1
           fi
