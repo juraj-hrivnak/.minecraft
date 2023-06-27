@@ -13,7 +13,7 @@ on:
       tag:
         required: true
         type: string
-      buildlabel:
+      projectsuffix:
         required: true
         type: string
 
@@ -40,10 +40,10 @@ jobs:
       - name: Create release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: CHANGELOG-${{ inputs.tag }}${{ inputs.buildlabel }}.md
+          body_path: CHANGELOG-${{ inputs.projectsuffix }}.md
           files: |
-            ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}.zip
-            ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}-Server-Pack.zip
+            ${{ inputs.projectname }}-${{ inputs.projectsuffix }}.zip
+            ${{ inputs.projectname }}-${{ inputs.projectsuffix }}-Server-Pack.zip
           tag_name: ${{ inputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -81,10 +81,10 @@ jobs:
         with:
           api-token: ${{ secrets.CF_API_TOKEN }}
           project-id: ${{ env.PROJECT_ID }}
-          modpack-path: ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}.zip
-          display-name: ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}
-          modpack-server-path: ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}-Server-Pack.zip
-          server-display-name: ${{ inputs.projectname }}-${{ inputs.tag }}${{ inputs.buildlabel }}-Server-Pack
+          modpack-path: ${{ inputs.projectname }}-${{ inputs.projectsuffix }}.zip
+          display-name: ${{ inputs.projectname }}-${{ inputs.projectsuffix }}
+          modpack-server-path: ${{ inputs.projectname }}-${{ inputs.projectsuffix }}-Server-Pack.zip
+          server-display-name: ${{ inputs.projectname }}-${{ inputs.projectsuffix }}-Server-Pack
           changelog: See https://github.com/juraj-hrivnak/Underdog/releases/tag/${{ inputs.tag }}
           changelog-format: markdown
           game-version: ${{ inputs.mcversion }}

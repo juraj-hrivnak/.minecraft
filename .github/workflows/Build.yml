@@ -14,15 +14,19 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       projectname: ${{ steps.info.outputs.projectname }}
-      packversion: ${{ steps.info.outputs.packversion }}
+      projectsuffix: ${{ steps.info.outputs.projectsuffix }}
       mcversion: ${{ steps.info.outputs.mcversion }}
       tag: ${{ steps.version.outputs.tag }}
-      buildlabel: ${{ steps.build.outputs.buildlabel }}
     steps:
       - name: Checkout with fetch depth 2
         uses: actions/checkout@v3
         with:
           fetch-depth: 2
+      - name: Get tag
+        id: version
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: tag_not_found
       - name: Get modpack info
         id: info
         run: |
@@ -30,29 +34,18 @@ jobs:
             echo "::error::Could not find manifest.json" && exit 1
           fi
           manifestjson=`cat pax/modpack/manifest.json`
-          projectname=`echo $(jq -r '.name' <<< "$manifestjson")`
-          echo "projectname=$projectname" >> $GITHUB_OUTPUT
-          packversion=`echo $(jq -r '.version' <<< "$manifestjson")`
-          echo "packversion=$packversion" >> $GITHUB_OUTPUT
-          mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
-          echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
-      - name: Get tag
-        id: version
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
-        with:
-          fallback: tag_not_found
-      - name: Create build label
-        id: build
-        shell: bash
-        run: |
-          set +e
-
           latest_tag=$(git describe --tags --abbrev=0)
 
+          projectname=`echo $(jq -r '.name' <<< "$manifestjson")`
+          echo "projectname=$projectname" >> $GITHUB_OUTPUT
+
+          mcversion=`echo $(jq -r '.minecraft.version' <<< "$manifestjson")`
+          echo "mcversion=$mcversion" >> $GITHUB_OUTPUT
+
           if [ $latest_tag = ${{ steps.version.outputs.tag }} ]; then
-            echo "buildlabel=" >> $GITHUB_OUTPUT
+            echo "projectsuffix=$latest_tag" >> $GITHUB_OUTPUT
           else
-            echo "buildlabel=-build.${{ github.run_number }}" >> $GITHUB_OUTPUT
+            echo "projectsuffix=build.${{ github.run_number }}" >> $GITHUB_OUTPUT
           fi
       - name: Checkout with fetch depth 0
         uses: actions/checkout@v3
@@ -192,14 +185,13 @@ jobs:
           perl -i -pe "s/\@mod_changes\@/$mod_changes/g" $changelog
 
           rm ./pax/modpack/manifest_prev.json
-
       - name: Rename changelog
-        run: mv CHANGELOG.md CHANGELOG-${{ steps.version.outputs.tag }}${{ steps.build.outputs.buildlabel }}.md
+        run: mv CHANGELOG.md CHANGELOG-${{ steps.info.outputs.projectsuffix }}.md
       - name: Upload changelog
         uses: actions/upload-artifact@v3
         with:
           name: changelog
-          path: CHANGELOG-${{ steps.version.outputs.tag }}${{ steps.build.outputs.buildlabel }}.md
+          path: CHANGELOG-${{ steps.info.outputs.projectsuffix }}.md
 
   build-modpack:
     name: Build Modpack
@@ -225,7 +217,7 @@ jobs:
 
           manifest="./pax/modpack/manifest.json"
 
-          perl -i -pe "s/\@version\@/${{ needs.modpack-info.outputs.tag }}/g" $manifest
+          perl -i -pe "s/\@version\@/${{ needs.modpack-info.outputs.projectsuffix }}/g" $manifest
       - name: Export modpack
         run: |
           cd pax/
@@ -234,12 +226,12 @@ jobs:
           sudo chmod +x ./pax
           ./pax export
       - name: Rename zip
-        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}.zip
+        run: mv pax/.out/${{ needs.modpack-info.outputs.projectname }}.zip pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.projectsuffix }}.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: modpack
-          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}.zip
+          path: pax/.out/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.projectsuffix }}.zip
 
   build-serverpack:
     name: Build Serverpack
@@ -263,21 +255,21 @@ jobs:
           java -jar ServerPackCreator-$server_pack_creator_version.jar -cli
       - name: Rename zip
         run: |
-          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
+          mv pax/serverpack/server-packs/_server_pack.zip pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.projectsuffix }}-Server-Pack.zip
       - name: Upload zip
         uses: actions/upload-artifact@v3
         with:
           name: serverpack
-          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.tag }}${{ needs.modpack-info.outputs.buildlabel }}-Server-Pack.zip
+          path: pax/serverpack/server-packs/${{ needs.modpack-info.outputs.projectname }}-${{ needs.modpack-info.outputs.projectsuffix }}-Server-Pack.zip
 
   release:
     name: Release
     needs: [modpack-info, build-modpack, build-serverpack]
-    if: ${{ needs.modpack-info.outputs.tag != 'tag_not_found' }}
+    if: startsWith(github.ref, 'refs/tags/v')
     uses: ./.github/workflows/Release.yml
     with:
       projectname: ${{ needs.modpack-info.outputs.projectname }}
       mcversion: ${{ needs.modpack-info.outputs.mcversion }}
       tag: ${{ needs.modpack-info.outputs.tag }}
-      buildlabel: ${{ needs.modpack-info.outputs.buildlabel }}
+      projectsuffix: ${{ needs.modpack-info.outputs.projectsuffix }}
     secrets: inherit
