@@ -6,10 +6,10 @@ An easy-to-use template for an automated modpack development environment.
 
 ## Features
 
-- **⌨️ Manage mods in CLI interface** using **[PAX]** without the need to use CurseForge launcher.
+- **⌨️ Manage mods in command-line interface** using **[PAX]** without the need to use CurseForge launcher.
 - **📦 Export modpack and server pack** easily, using **[PAX]** and **[ServerPackCreator]**.
-- **🤝 Multiple people working together**.
-  - **📥 Download mods and resource packs** using **[ModpackDownloader]**.
+- **🤝** Designed for multiple people working together...
+  - **📥** Mod `.jar`s, resource packs, shader packs and overrides are handled properly! **[ModpackDownloader]**.
   - **🧰 Easy integration with [MultiMC] file structure**.
 - **📝 Handle changelogs easily**, based on **[Keep a Changelog]**.
 - **🧬 CI/CD** using **[GitHub Actions]**.
