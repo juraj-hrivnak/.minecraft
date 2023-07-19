@@ -32,9 +32,6 @@ This template uses various tools to help you with your modpack development and r
 
 ## Setup
 
-> **Note** \
-> This setup process is still work-in-progress and will be improved in the future.
-
 1. Click on the ["Use this template"] button.
 2. Clone the repository to your modpack folder.
 3. Run the set-up script:
@@ -50,14 +47,14 @@ This template uses various tools to help you with your modpack development and r
     3. Copy your generated secret (the jumbled mess of numbers, letters and dashes).
       ![new_token_copy](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/5c8cd169-5249-40b0-bd23-f42926c88789)
       
-    4. [Create a new Secret for GitHub Actions] with name `CF_API_TOKEN`, and for the value, paste your previously copied secret.
+    4. [Create a new Secret for GitHub Actions] with the name `CF_API_TOKEN`, and for the value, paste your previously copied secret.
     5. Open an editor with the release workflow config file (located at [.github/workflows/Release.yml](.github/workflows/Release.yml#L28C1-L29) in your project folder).
     6. Locate the `PROJECT_ID` env variable and change the value to your modpack project ID.
       ```yml
       env:
         PROJECT_ID: "443254" # If your Curseforge page shows 443254 as the Project ID.
       ```
-6. Enjoy!
+5. Enjoy!
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
