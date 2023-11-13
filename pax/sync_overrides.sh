@@ -13,9 +13,9 @@ sync_directory() {
 
     if [ -d "../$source_dir" ]; then
         cp -r "../$source_dir" "$dest_dir/$source_dir"
-        echo "${GREEN}$source_dir synced"
+        echo -e "${GREEN}$source_dir synced"
     else
-        echo "${RED}$source_dir not found"
+        echo -e "${RED}$source_dir not found"
     fi
     
     
