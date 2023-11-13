@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+
 sync_directory() {
     source_dir="$1"
     dest_dir="modpack/overrides"
@@ -8,9 +11,14 @@ sync_directory() {
         rm -rf "$dest_dir/$source_dir"
     fi
 
-    cp -r "../$source_dir" "$dest_dir/$source_dir"
-
-    echo "$source_dir synced!"
+    if [ -d "../$source_dir" ]; then
+        cp -r "../$source_dir" "$dest_dir/$source_dir"
+        echo "${GREEN}$source_dir synced"
+    else
+        echo "${RED}$source_dir not found"
+    fi
+    
+    
 }
 
 echo "Started syncing files!"
