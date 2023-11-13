@@ -38,8 +38,8 @@ This template uses various tools to help you with your modpack development and r
     - If you are on _Windows 10 or higher_, run the `./pax/setup-windows.ps1` with _PowerShell_.
     - If you are on _Linux_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `sh setup-linux.sh`.
     - If you are on _macOS_, open your _terminal_ and use the `cd` command to move into the `./pax` folder, then run `brew install grep` and after it is finished, run `sh setup-macos.sh`.
-
-4. Set up automatic releases using a CurseForge API token. (Can be done later or skipped if you don't wish to have releases automated.)
+4. Configure overrides in the `./pax/sync_overrides.sh`. By default only `config`, `local`, `oresources`, `patchouli_books`, `resources`, `scripts` and `structures` are synced with your modpack folder.
+5. Set up automatic releases using a CurseForge API token. (Can be done later or skipped if you don't wish to have releases automated.)
     1. Navigate to [curseforge.com/account/api-tokens](https://curseforge.com/account/api-tokens).
     2. Enter a name for your token and hit the "Generate Token" button.
       ![new_token](https://github.com/juraj-hrivnak/.minecraft/assets/71150936/1718613a-8994-4102-a2a2-aff7939d36ad)
@@ -54,7 +54,18 @@ This template uses various tools to help you with your modpack development and r
       env:
         PROJECT_ID: "443254" # If your Curseforge page shows 443254 as the Project ID.
       ```
-5. Enjoy!
+6. Enjoy!
+
+## Development
+
+After you have set up your modpack, use the [ModpackDownloader] to download the mod `.jar`s and other files.
+
+- Open your _terminal/cmd_ and use the `cd` command to move into the `./pax` folder, then run the [ModpackDownloader]:
+    ```
+    java -jar ModpackDownloader-<version>.jar modpack ..
+    ```
+    > **Note**
+    > Make sure to replace the `<version>` with the correct version of ModpackDownloader.
 
 <!-- Links: -->
 [PAX]: https://github.com/froehlichA/pax
