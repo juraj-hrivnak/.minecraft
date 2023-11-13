@@ -1,79 +1,27 @@
-echo Started to syncing files!
+#!/bin/bash
 
-# config
-cd modpack/overrides
-if [ -d "config" ]; then
-    rm -rf config
-fi
-cd ../../..
-cp -r config pax/modpack/overrides
-cd pax
+sync_directory() {
+    source_dir="$1"
+    dest_dir="modpack/overrides"
 
-echo Config synced!
+    if [ -d "$dest_dir/$source_dir" ]; then
+        rm -rf "$dest_dir/$source_dir"
+    fi
 
-# local
-cd modpack/overrides
-if [ -d "local" ]; then
-    rm -rf local
-fi
-cd ../../..
-cp -r local pax/modpack/overrides
-cd pax
+    cp -r "../$source_dir" "$dest_dir/$source_dir"
 
-echo Local synced!
+    echo "$source_dir synced!"
+}
 
-# oresources
-cd modpack/overrides
-if [ -d "oresources" ]; then
-    rm -rf oresources
-fi
-cd ../../..
-cp -r oresources pax/modpack/overrides
-cd pax
+echo "Started syncing files!"
 
-echo Oresources synced!
+# Sync each directory
+sync_directory "config"
+sync_directory "local"
+sync_directory "oresources"
+sync_directory "patchouli_books"
+sync_directory "resources"
+sync_directory "scripts"
+sync_directory "structures"
 
-# patchouli_books
-cd modpack/overrides
-if [ -d "patchouli_books" ]; then
-    rm -rf patchouli_books
-fi
-cd ../../..
-cp -r patchouli_books pax/modpack/overrides
-cd pax
-
-echo Patchouli Books synced!
-
-# resources
-cd modpack/overrides
-if [ -d "resources" ]; then
-    rm -rf resources
-fi
-cd ../../..
-cp -r resources pax/modpack/overrides
-cd pax
-
-echo Resources synced!
-
-# scripts
-cd modpack/overrides
-if [ -d "scripts" ]; then
-    rm -rf scripts
-fi
-cd ../../..
-cp -r scripts pax/modpack/overrides
-cd pax
-
-echo Scripts synced!
-
-# structures
-cd modpack/overrides
-if [ -d "structures" ]; then
-    rm -rf structures
-fi
-cd ../../..
-cp -r structures pax/modpack/overrides
-cd pax
-
-echo Structures synced!
-echo Syncing completed!
+echo "Syncing completed!"
