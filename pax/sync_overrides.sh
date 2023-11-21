@@ -17,8 +17,6 @@ sync_directory() {
     else
         echo -e "${RED}$source_dir not found"
     fi
-    
-    
 }
 
 echo "Started syncing files!"
